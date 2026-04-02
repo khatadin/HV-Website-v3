@@ -1,8 +1,29 @@
-<script>
-  const password = prompt("Enter password:");
-  if (password !== "skipowder") {
-    document.body.innerHTML = "<h1>Access denied</h1>";
-  }
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; }
+    input { padding: 8px; margin-right: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    button { padding: 8px 16px; cursor: pointer; }
+    #error { color: red; margin-top: 12px; display: none; }
+  </style>
+</head>
+<body>
+  <div>
+    <input type="password" id="pw" placeholder="Enter password" />
+    <button onclick="checkPw()">Enter</button>
+    <p id="error">Incorrect password.</p>
+  </div>
+  <script>
+    function checkPw() {
+      if (document.getElementById("pw").value === "skipowder") {
+        window.location.href = "highvista_redesign.html";
+      } else {
+        document.getElementById("error").style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
 <!DOCTYPE html>
 <html><head><meta http-equiv="refresh" content="0;url=highvista_redesign.html"></head><body></body></html>
