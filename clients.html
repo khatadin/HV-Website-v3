@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clients – HighVista Strategies</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy:#0d1f3c;--navy-mid:#162d52;--accent:#0a8fa3;--accent-lt:#1aaec4;--cream:#f7f4ef;--light:#ffffff;--text:#1a1a2e;--muted:#6b7280;--border:#e2ddd6; }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--light);line-height:1.7;font-size:16px;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:100px;background:rgba(13,31,60,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(10,143,163,0.2);}
+    .nav-logo{font-family:'EB Garamond',serif;font-size:1.35rem;font-weight:500;color:var(--light);letter-spacing:0.02em;text-decoration:none;}
+    .nav-logo span{color:var(--accent-lt);}
+    .nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+    .nav-links a{color:rgba(255,255,255,0.78);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--accent-lt);}
+    .nav-dropdown{position:relative;}
+    .nav-dropdown>a::after{content:' ▾';font-size:0.65rem;}
+    .nav-dropdown-menu{position:absolute;top:calc(100% + 12px);left:0;background:var(--navy);min-width:240px;padding:8px 0;opacity:0;visibility:hidden;transition:opacity 0.2s,visibility 0.2s;border-top:2px solid var(--accent);box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+    .nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;}
+    .nav-dropdown-menu a{display:block;padding:10px 20px;font-size:0.8rem;color:rgba(255,255,255,0.65);letter-spacing:0.05em;transition:background 0.15s,color 0.15s;text-transform:none;}
+    .nav-dropdown-menu a:hover{background:rgba(255,255,255,0.05);color:var(--accent-lt);}
+    .nav-dropdown-menu .sub-label{display:block;padding:10px 20px 4px;font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:0.12em;text-transform:uppercase;}
+    .nav-cta{background:transparent!important;border:1px solid var(--accent);color:var(--accent)!important;padding:8px 20px;border-radius:2px;}
+    .nav-cta:hover{background:var(--accent)!important;color:var(--light)!important;}
+    .page-hero{padding:164px 60px 80px;min-height:440px;background:var(--navy);position:relative;overflow:hidden;}
+    .page-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(10,143,163,0.08) 0%,transparent 70%);}
+    .breadcrumb{position:relative;z-index:1;display:flex;align-items:center;gap:8px;margin-bottom:24px;}
+    .breadcrumb a,.breadcrumb span{font-size:0.75rem;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;}
+    .breadcrumb a:hover{color:var(--accent-lt);}
+    .breadcrumb-sep{color:rgba(255,255,255,0.2);font-size:0.65rem;}
+    .page-eyebrow{position:relative;z-index:1;display:inline-flex;align-items:center;gap:12px;color:var(--accent-lt);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;}
+    .page-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
+    .page-hero h1{position:relative;z-index:1;font-family:'EB Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:400;color:var(--light);line-height:1.2;margin-bottom:20px;}
+    .page-hero p{position:relative;z-index:1;color:rgba(255,255,255,0.6);font-size:1.05rem;font-weight:300;max-width:580px;line-height:1.8;}
+    section{padding:90px 60px;}
+    .section-eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--accent);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px;}
+    .section-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
+    .section-title{font-family:'EB Garamond',serif;font-size:clamp(1.9rem,3vw,2.6rem);font-weight:400;color:var(--navy);line-height:1.2;margin-bottom:20px;}
+    .section-lead{color:var(--muted);font-size:1rem;font-weight:300;max-width:620px;line-height:1.8;}
+    /* CLIENT TYPES */
+    .client-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border);border:1px solid var(--border);margin-top:56px;}
+    .client-card{background:var(--light);padding:44px 36px;position:relative;overflow:hidden;transition:background 0.2s;}
+    .client-card:hover{background:var(--cream);}
+    .client-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--accent);transition:height 0.3s;}
+    .client-card:hover::before{height:100%;}
+    .client-pct{font-family:'EB Garamond',serif;font-size:3rem;color:var(--accent);opacity:0.7;line-height:1;margin-bottom:12px;}
+    .client-card h4{font-family:'EB Garamond',serif;font-size:1.25rem;color:var(--navy);margin-bottom:12px;}
+    .client-card p{font-size:0.875rem;color:var(--muted);line-height:1.75;}
+    /* ACCESS */
+    #access{background:var(--cream);}
+    .access-two{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:56px;}
+    .access-body p{color:#444;font-size:1rem;line-height:1.85;margin-bottom:20px;}
+    .access-options{display:flex;flex-direction:column;gap:0;}
+    .access-option{padding:28px 0;border-bottom:1px solid var(--border);}
+    .access-option:first-child{border-top:1px solid var(--border);}
+    .access-option h4{font-size:0.9rem;font-weight:600;color:var(--navy);margin-bottom:8px;}
+    .access-option p{font-size:0.875rem;color:var(--muted);line-height:1.7;}
+    .access-tag{display:inline-block;font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;border-radius:1px;margin-bottom:12px;}
+    /* DARK STATS */
+    #why{background:var(--navy);}
+    #why .section-title{color:var(--light);}
+    #why .section-lead{color:rgba(255,255,255,0.55);}
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:56px;}
+    .why-item{border-top:1px solid rgba(10,143,163,0.3);padding-top:24px;}
+    .why-item h4{font-size:0.9rem;font-weight:600;color:var(--light);margin-bottom:10px;}
+    .why-item p{font-size:0.875rem;color:rgba(255,255,255,0.5);line-height:1.75;}
+    .cta-banner{background:var(--navy-mid);padding:80px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;border-top:1px solid rgba(10,143,163,0.2);border-bottom:1px solid rgba(10,143,163,0.2);}
+    .cta-banner h2{font-family:'EB Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--light);font-weight:400;max-width:560px;}
+    .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--light);padding:14px 32px;font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.15s;}
+    .btn-primary:hover{background:var(--accent-lt);transform:translateY(-1px);}
+    footer{background:var(--navy);padding:60px 60px 40px;border-top:1px solid rgba(255,255,255,0.06);}
+    .footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:60px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);}
+    .footer-brand .nav-logo{display:block;margin-bottom:16px;font-size:1.2rem;}
+    .footer-brand p{color:rgba(255,255,255,0.4);font-size:0.85rem;line-height:1.7;max-width:280px;}
+    .footer-links-group h5{color:var(--accent-lt);font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:18px;}
+    .footer-links-group ul{list-style:none;}
+    .footer-links-group li{margin-bottom:10px;}
+    .footer-links-group a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.875rem;transition:color 0.2s;}
+    .footer-links-group a:hover{color:var(--accent-lt);}
+    .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;}
+    .footer-bottom p{color:rgba(255,255,255,0.28);font-size:0.78rem;}
+    .footer-legal{display:flex;gap:24px;}
+    .footer-legal a{color:rgba(255,255,255,0.28);font-size:0.78rem;text-decoration:none;}
+    .footer-legal a:hover{color:rgba(255,255,255,0.6);}
+    .disclosure{background:#f0ede8;padding:28px 60px;border-top:1px solid var(--border);}
+    .disclosure p{font-size:0.72rem;color:#999;line-height:1.6;}
+    @media(max-width:900px){nav{padding:0 24px;}.nav-links{display:none;}section,.page-hero,.cta-banner{padding-left:24px;padding-right:24px;}.client-grid{grid-template-columns:1fr;}.access-two{grid-template-columns:1fr;gap:40px;}.why-grid{grid-template-columns:1fr;}.footer-top{flex-direction:column;gap:36px;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}.cta-banner{flex-direction:column;text-align:center;}.disclosure{padding:24px;}}
+  .hero-mountain{position:absolute;right:0;top:0;height:100%;width:58%;pointer-events:none;object-fit:cover;object-position:left top;-webkit-mask-image:linear-gradient(to right,transparent 0%,black 18%);mask-image:linear-gradient(to right,transparent 0%,black 18%);opacity:0.9;}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a>
+    <ul class="nav-links">
+            <li class="nav-dropdown">
+        <a href="about.html">About</a>
+        <div class="nav-dropdown-menu">
+          <a href="about.html#firm-edge">Firm Edge</a>
+          <a href="about.html#culture">Culture</a>
+          <a href="about.html#milestones">History</a>
+          <a href="team.html">Our Team</a>
+          <a href="about.html#responsibility">Responsibility</a>
+        </div>
+      </li>
+      <li class="nav-dropdown"><a href="#">Strategies</a>
+        <div class="nav-dropdown-menu">
+          <span class="sub-label">All Strategies</span><a href="multi-asset.html">Multi-Asset Alternatives</a>
+          <span class="sub-label">Private Markets</span><a href="private-credit.html">Private Credit</a><a href="private-equity.html">Lower Middle Market PE</a><a href="venture-capital.html">Early-Stage Venture Capital</a>
+          <span class="sub-label">Public Markets</span><a href="public-markets.html">Differentiated Public Markets</a>
+        </div>
+      </li>
+      <li><a href="team.html">Our Team</a></li>
+      <li><a href="clients.html">Clients</a></li>
+      <li><a href="news.html">News &amp; Insights</a></li>
+      <li><a href="mailto:info@highvistastrategies.com" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=85&fit=crop" class="hero-mountain" alt="">
+    <div class="breadcrumb"><a href="highvista_redesign.html">Home</a><span class="breadcrumb-sep">›</span><span>Clients</span></div>
+    <div class="page-eyebrow">Who We Serve</div>
+    <h1>A Global Base of<br>Sophisticated Investors</h1>
+    <p>HighVista partners with a diverse range of institutional investors, family offices, endowments, and foundations who share our conviction that differentiated thinking leads to superior long-term outcomes.</p>
+  </div>
+
+  <section id="types">
+    <div class="section-eyebrow">Client Types</div>
+    <h2 class="section-title">Who We Work With</h2>
+    <p class="section-lead">Our client base spans institutions and private capital globally, each seeking access to HighVista's differentiated alternative investment capabilities.</p>
+    <div class="client-grid">
+      <div class="client-card">
+        <div class="client-pct">30%</div>
+        <h4>Pension Funds</h4>
+        <p>Public and private pension funds with long-duration liabilities seek HighVista's strategies for their ability to generate consistent, risk-adjusted returns uncorrelated to traditional equity and fixed income allocations.</p>
+      </div>
+      <div class="client-card">
+        <div class="client-pct">26%</div>
+        <h4>Endowments &amp; Foundations</h4>
+        <p>University endowments and philanthropic foundations choose HighVista for its endowment-model approach to alternatives — disciplined diversification across public and private markets with a long-term investment horizon.</p>
+      </div>
+      <div class="client-card">
+        <div class="client-pct">28%</div>
+        <h4>Private Clients &amp; Family Offices</h4>
+        <p>Family offices and private clients seek access to the same institutional-quality alternative strategies typically available only to the largest institutional investors, with the personalized attention HighVista's scale enables.</p>
+      </div>
+      <div class="client-card">
+        <div class="client-pct">16%</div>
+        <h4>Sovereign Wealth &amp; Other Institutional</h4>
+        <p>Sovereign wealth funds and other institutional investors partner with HighVista for access to its specialized expertise in structurally inefficient markets, including its lower middle market private equity and opportunistic credit capabilities.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="access">
+    <div class="section-eyebrow">Investment Access</div>
+    <h2 class="section-title">How Clients Invest<br>with HighVista</h2>
+    <div class="access-two">
+      <div class="access-body">
+        <p>HighVista offers clients flexibility in how they access our investment strategies. Investors may choose to participate in our commingled fund offerings for diversified alternatives exposure, or they may elect to invest in individual strategies to target specific segments of the market.</p>
+        <p>For institutional clients with specific investment policy guidelines, portfolio constraints, or scale requirements, HighVista also offers customized separate account mandates that can be tailored to meet individual needs.</p>
+        <p>Our client relations team works closely with investors and their advisors to ensure the right fit between client objectives and HighVista's available strategies, and to facilitate the ongoing management of the investor relationship with full transparency.</p>
+      </div>
+      <div class="access-options">
+        <div class="access-option">
+          <div class="access-tag">Commingled</div>
+          <h4>Multi-Asset Alternative Strategy</h4>
+          <p>A diversified portfolio spanning the full breadth of HighVista's capabilities — ideal for investors seeking a single alternatives allocation that provides broad exposure to private and public market opportunities.</p>
+        </div>
+        <div class="access-option">
+          <div class="access-tag">Specialized</div>
+          <h4>Single Strategy Access</h4>
+          <p>Investors may also access individual HighVista strategies — private equity, private credit, venture capital, or public market strategies — to complement or enhance their existing portfolio allocations.</p>
+        </div>
+        <div class="access-option">
+          <div class="access-tag">Custom</div>
+          <h4>Separate Account Mandates</h4>
+          <p>For institutional investors with specific requirements, HighVista structures customized mandates with tailored guidelines, reporting, and portfolio construction aligned to each client's unique investment objectives.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="section-eyebrow">Why HighVista</div>
+    <h2 class="section-title">What Our Clients Value Most</h2>
+    <p class="section-lead">Our clients consistently highlight these qualities as defining characteristics of the HighVista partnership.</p>
+    <div class="why-grid">
+      <div class="why-item"><h4>Genuine Alignment</h4><p>HighVista invests its own capital alongside every client strategy. This co-investment model ensures that the firm's interests are always fully aligned with investor outcomes — not just in theory, but in practice.</p></div>
+      <div class="why-item"><h4>Access to Inefficient Markets</h4><p>Clients gain access to investment opportunities in structurally underfollowed market segments — lower middle market private equity, opportunistic credit, early-stage venture — that are difficult or impossible to access independently.</p></div>
+      <div class="why-item"><h4>Rigorous Risk Management</h4><p>Portfolio-level risk management is embedded in every aspect of HighVista's process. Clients value the firm's proven ability to protect capital during market dislocations while preserving the ability to pursue opportunity.</p></div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Ready to explore an investment<br>partnership with HighVista?</h2>
+    <a href="mailto:info@highvistastrategies.com" class="btn-primary">Contact Us <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a><p>An employee-owned alternative asset manager helping sophisticated investors achieve enduring alpha in structurally inefficient markets.</p></div>
+      <div class="footer-links-group"><h5>Strategies</h5><ul><li><a href="multi-asset.html">Multi-Asset Alternatives</a></li><li><a href="private-credit.html">Private Credit</a></li><li><a href="private-equity.html">Private Equity</a></li><li><a href="venture-capital.html">Venture Capital</a></li><li><a href="public-markets.html">Public Markets</a></li></ul></div>
+      <div class="footer-links-group"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="clients.html">Clients</a></li></ul></div>
+      <div class="footer-links-group"><h5>Contact</h5><ul><li><a href="#">Boston, Massachusetts</a></li><li><a href="mailto:info@highvistastrategies.com">info@highvistastrategies.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 HighVista Strategies LLC. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">ADV Brochure</a></div></div>
+  </footer>
+  <div class="disclosure"><p>HighVista Strategies LLC is an investment adviser registered with the U.S. Securities and Exchange Commission. Registration does not imply a certain level of skill or training. Past performance is not indicative of future results. This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. Investing involves risk, including the possible loss of principal.</p></div>
+  <script>
+    (function() {
+      var page = window.location.pathname.split('/').pop() || 'highvista_redesign.html';
+      document.querySelectorAll('.nav-links a').forEach(function(a) {
+        var href = (a.getAttribute('href') || '').split('#')[0];
+        if (href && href === page) { a.classList.add('nav-active'); }
+      });
+    })();
+  </script>
+</body>
+</html>

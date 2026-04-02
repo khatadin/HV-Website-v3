@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News &amp; Insights – HighVista Strategies</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1f3c; --navy-mid: #162d52;
+      --accent: #0a8fa3; --accent-lt: #1aaec4;
+      --cream: #f7f4ef; --light: #ffffff;
+      --text: #1a1a2e; --muted: #6b7280; --border: #e2ddd6;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--light); line-height: 1.7; font-size: 16px; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; height: 100px; background: rgba(13,31,60,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(10,143,163,0.2); }
+    .nav-logo { font-family: 'EB Garamond', serif; font-size: 1.35rem; font-weight: 500; color: var(--light); letter-spacing: 0.02em; text-decoration: none; }
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links a { color: rgba(255,255,255,0.78); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent-lt); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a::after { content: ' ▾'; font-size: 0.65rem; }
+    .nav-dropdown-menu { position: absolute; top: calc(100% + 12px); left: 0; background: var(--navy); min-width: 240px; padding: 8px 0; opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s; border-top: 2px solid var(--accent); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .nav-dropdown:hover .nav-dropdown-menu { opacity: 1; visibility: visible; }
+    .nav-dropdown-menu a { display: block; padding: 10px 20px; font-size: 0.8rem; color: rgba(255,255,255,0.65); letter-spacing: 0.05em; transition: background 0.15s, color 0.15s; text-transform: none; }
+    .nav-dropdown-menu a:hover { background: rgba(255,255,255,0.05); color: var(--accent-lt); }
+    .nav-dropdown-menu .sub-label { display: block; padding: 10px 20px 4px; font-size: 0.65rem; color: rgba(255,255,255,0.3); letter-spacing: 0.12em; text-transform: uppercase; }
+    .nav-cta { background: transparent !important; border: 1px solid var(--accent); color: var(--accent) !important; padding: 8px 20px; border-radius: 2px; transition: background 0.2s, color 0.2s !important; }
+    .nav-cta:hover { background: var(--accent) !important; color: var(--light) !important; }
+
+    /* PAGE HERO */
+    .page-hero { padding: 164px 60px 80px; min-height: 440px; background: var(--navy); position: relative; overflow: hidden; }
+    .page-hero::after { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(10,143,163,0.08) 0%, transparent 70%); }
+    .hero-mountain { position: absolute; right: 0; top: 0; height: 100%; width: 58%; pointer-events: none; object-fit: cover; object-position: left top; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 18%); mask-image: linear-gradient(to right, transparent 0%, black 18%); opacity: 0.9; }
+    .breadcrumb { position: relative; z-index: 1; display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+    .breadcrumb a, .breadcrumb span { font-size: 0.75rem; color: rgba(255,255,255,0.4); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; }
+    .breadcrumb a:hover { color: var(--accent-lt); }
+    .breadcrumb-sep { color: rgba(255,255,255,0.2); font-size: 0.65rem; }
+    .page-eyebrow { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 12px; color: var(--accent-lt); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 16px; }
+    .page-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
+    .page-hero h1 { position: relative; z-index: 1; font-family: 'EB Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 400; color: var(--light); line-height: 1.2; margin-bottom: 20px; }
+    .page-hero p { position: relative; z-index: 1; color: rgba(255,255,255,0.6); font-size: 1.05rem; font-weight: 300; max-width: 580px; line-height: 1.8; }
+
+    /* FEATURED */
+    .featured-section { padding: 80px 60px 0; background: var(--light); }
+    .section-eyebrow { display: inline-flex; align-items: center; gap: 12px; color: var(--accent); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 20px; }
+    .section-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
+    .section-title { font-family: 'EB Garamond', serif; font-size: clamp(1.9rem, 3vw, 2.6rem); font-weight: 400; color: var(--navy); line-height: 1.2; margin-bottom: 20px; }
+    .featured-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); margin-top: 40px; }
+    .featured-card { background: var(--light); padding: 44px 40px; transition: background 0.2s; cursor: default; }
+    .featured-card:hover { background: var(--cream); }
+    .featured-card.large { grid-column: 1; grid-row: 1 / 3; display: flex; flex-direction: column; justify-content: flex-end; background: #0f3a44; padding: 48px 44px; }
+    .featured-card.large:hover { background: #143e4a; }
+    .featured-card.large .card-cat { color: var(--accent-lt); }
+    .featured-card.large .card-title { color: var(--light); font-size: 1.6rem; }
+    .featured-card.large .card-date { color: rgba(255,255,255,0.4); }
+    .featured-card.large .card-desc { color: rgba(255,255,255,0.55); }
+    .card-cat { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .card-title { font-family: 'EB Garamond', serif; font-size: 1.15rem; color: var(--navy); font-weight: 500; line-height: 1.35; margin-bottom: 10px; }
+    .card-date { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 14px; }
+    .card-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.75; }
+
+    /* FILTER + ARCHIVE */
+    .archive-section { padding: 60px 60px 90px; background: var(--light); }
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    .filter-btn { padding: 8px 20px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--border); background: var(--light); color: var(--muted); cursor: pointer; border-radius: 2px; transition: all 0.15s; }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { background: var(--navy); color: var(--light); border-color: var(--navy); }
+
+    .year-group { margin-bottom: 52px; }
+    .year-label { font-family: 'EB Garamond', serif; font-size: 2rem; color: var(--accent); margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .news-list { display: flex; flex-direction: column; gap: 0; }
+    .news-item { display: grid; grid-template-columns: 130px 90px 1fr; gap: 24px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--border); transition: background 0.15s; }
+    .news-item:first-child { border-top: none; }
+    .news-item:hover { background: var(--cream); margin: 0 -20px; padding: 20px 20px; }
+    .news-date { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.02em; white-space: nowrap; }
+    .news-cat { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+    .news-cat.insights { color: #6366f1; }
+    .news-cat.press { color: var(--accent); }
+    .news-cat.podcast { color: #0a9a6e; }
+    .news-cat.inthenews { color: #c97a12; }
+    .news-title { font-size: 0.925rem; color: var(--navy); font-weight: 400; line-height: 1.5; }
+
+    /* DISCLAIMER */
+    .disclaimer-section { background: var(--cream); padding: 40px 60px; border-top: 1px solid var(--border); }
+    .disclaimer-section p { font-size: 0.75rem; color: var(--muted); line-height: 1.7; max-width: 900px; }
+
+    /* CTA */
+    .cta-banner { background: var(--navy-mid); padding: 80px 60px; display: flex; align-items: center; justify-content: space-between; gap: 40px; border-top: 1px solid rgba(10,143,163,0.2); border-bottom: 1px solid rgba(10,143,163,0.2); }
+    .cta-banner h2 { font-family: 'EB Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); color: var(--light); font-weight: 400; max-width: 560px; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--light); padding: 14px 32px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background 0.2s, transform 0.15s; }
+    .btn-primary:hover { background: var(--accent-lt); transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer { background: var(--navy); padding: 60px 60px 40px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 60px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .footer-brand p { color: rgba(255,255,255,0.4); font-size: 0.85rem; line-height: 1.7; max-width: 280px; margin-top: 16px; }
+    .footer-links-group h5 { color: var(--accent-lt); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 18px; }
+    .footer-links-group ul { list-style: none; }
+    .footer-links-group li { margin-bottom: 10px; }
+    .footer-links-group a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .footer-links-group a:hover { color: var(--accent-lt); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; }
+    .footer-bottom p { color: rgba(255,255,255,0.28); font-size: 0.78rem; }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { color: rgba(255,255,255,0.28); font-size: 0.78rem; text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+    .disclosure { background: #f0ede8; padding: 28px 60px; border-top: 1px solid var(--border); }
+    .disclosure p { font-size: 0.72rem; color: #999; line-height: 1.6; }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; } .nav-links { display: none; }
+      .page-hero, .featured-section, .archive-section, .cta-banner, .disclaimer-section { padding-left: 24px; padding-right: 24px; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .featured-card.large { grid-column: 1; grid-row: auto; }
+      .news-item { grid-template-columns: 1fr; gap: 4px; }
+      .footer-top { flex-direction: column; gap: 36px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .cta-banner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="about.html">About</a>
+        <div class="nav-dropdown-menu">
+          <a href="about.html#firm-edge">Firm Edge</a>
+          <a href="about.html#culture">Culture</a>
+          <a href="about.html#milestones">History</a>
+          <a href="team.html">Our Team</a>
+          <a href="about.html#responsibility">Responsibility</a>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="#">Strategies</a>
+        <div class="nav-dropdown-menu">
+          <span class="sub-label">All Strategies</span>
+          <a href="multi-asset.html">Multi-Asset Alternatives</a>
+          <span class="sub-label">Private Markets</span>
+          <a href="private-credit.html">Private Credit</a>
+          <a href="private-equity.html">Lower Middle Market PE</a>
+          <a href="venture-capital.html">Early-Stage Venture Capital</a>
+          <span class="sub-label">Public Markets</span>
+          <a href="public-markets.html">Differentiated Public Markets</a>
+        </div>
+      </li>
+      <li><a href="team.html">Our Team</a></li>
+      <li><a href="clients.html">Clients</a></li>
+      <li><a href="news.html" style="color:var(--accent-lt)">News &amp; Insights</a></li>
+      <li><a href="mailto:info@highvistastrategies.com" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=85&fit=crop" class="hero-mountain" alt="">
+    <div class="breadcrumb">
+      <a href="highvista_redesign.html">Home</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>News &amp; Insights</span>
+    </div>
+    <div class="page-eyebrow">Perspectives &amp; Press</div>
+    <h1>News &amp; Insights</h1>
+    <p>Alpha generation starts with a differentiated point of view. Read how HighVista's investment teams think about markets, strategies, and the opportunities others miss.</p>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="featured-section">
+    <div class="section-eyebrow">Recent Highlights</div>
+    <h2 class="section-title">Latest from HighVista</h2>
+    <div class="featured-grid">
+
+      <div class="featured-card large">
+        <div class="card-cat">Insights</div>
+        <div class="card-title">AI Anxiety: Why Markets are Struggling to Price Software &amp; Private Credit Assets</div>
+        <div class="card-date">March 23, 2026</div>
+        <div class="card-desc">A HighVista perspective on how artificial intelligence is reshaping pricing dynamics across both software equities and private credit — and where we see persistent alpha opportunities in the dislocations it creates.</div>
+      </div>
+
+      <div class="featured-card">
+        <div class="card-cat">Podcasts</div>
+        <div class="card-title">André Perold – Beautifully Inefficient Markets – Private Capital Podcast</div>
+        <div class="card-date">March 2, 2026</div>
+        <div class="card-desc">HighVista's Co-Founder and CIO discusses the enduring alpha opportunity in markets that remain structurally inefficient, and how HighVista navigates them.</div>
+      </div>
+
+      <div class="featured-card">
+        <div class="card-cat">Press Release</div>
+        <div class="card-title">HighVista Closes Oversubscribed Private Equity Fund XI at $800 Million</div>
+        <div class="card-date">February 3, 2026</div>
+        <div class="card-desc">HighVista's eleventh private equity fund closed oversubscribed, surpassing its target and reflecting continued strong investor demand for our lower middle market alpha strategy.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ARCHIVE -->
+  <div class="archive-section">
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterNews('all', this)">All</button>
+      <button class="filter-btn" onclick="filterNews('insights', this)">Insights</button>
+      <button class="filter-btn" onclick="filterNews('press', this)">Press Releases</button>
+      <button class="filter-btn" onclick="filterNews('podcast', this)">Podcasts</button>
+      <button class="filter-btn" onclick="filterNews('inthenews', this)">In the News</button>
+    </div>
+
+    <!-- 2026 -->
+    <div class="year-group" data-year="2026">
+      <div class="year-label">2026</div>
+      <div class="news-list">
+        <div class="news-item" data-cat="insights">
+          <span class="news-date">Mar 23, 2026</span>
+          <span class="news-cat insights">Insights</span>
+          <span class="news-title">AI Anxiety: Why Markets are Struggling to Price Software &amp; Private Credit Assets</span>
+        </div>
+        <div class="news-item" data-cat="press">
+          <span class="news-date">Mar 19, 2026</span>
+          <span class="news-cat press">Press Release</span>
+          <span class="news-title">HighVista Appoints Raudel Yanez to Launch GP-Led Secondaries Strategy</span>
+        </div>
+        <div class="news-item" data-cat="podcast">
+          <span class="news-date">Mar 2, 2026</span>
+          <span class="news-cat podcast">Podcast</span>
+          <span class="news-title">André Perold – Beautifully Inefficient Markets – Private Capital Podcast</span>
+        </div>
+        <div class="news-item" data-cat="press">
+          <span class="news-date">Feb 3, 2026</span>
+          <span class="news-cat press">Press Release</span>
+          <span class="news-title">HighVista Closes Oversubscribed Private Equity Fund XI at $800 Million, Surpassing Target</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Jan 27, 2026</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Whit Matthews – Where Fundless Sponsors Turn for Capital – Mergers &amp; Acquisitions</span>
+        </div>
+        <div class="news-item" data-cat="press">
+          <span class="news-date">Jan 6, 2026</span>
+          <span class="news-cat press">Press Release</span>
+          <span class="news-title">HighVista Strategies Appoints Three Senior Leaders as Partners</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2025 -->
+    <div class="year-group" data-year="2025">
+      <div class="year-label">2025</div>
+      <div class="news-list">
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Nov 18, 2025</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Kirsten Morin – Venture Capital Journal</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Nov 17, 2025</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Whit Matthews – New Kids on the Block – Mergers &amp; Acquisitions</span>
+        </div>
+        <div class="news-item" data-cat="press">
+          <span class="news-date">Oct 21, 2025</span>
+          <span class="news-cat press">Press Release</span>
+          <span class="news-title">HighVista Strategies Raises $270 Million for Oversubscribed Venture Capital Fund</span>
+        </div>
+        <div class="news-item" data-cat="podcast">
+          <span class="news-date">Sep 25, 2025</span>
+          <span class="news-cat podcast">Podcast</span>
+          <span class="news-title">Ben Radinsky – Beautifully Inefficient: Uncovering Hidden Alpha in Private Credit – Private Markets 360° Podcast</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Sep 24, 2025</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Luke Chan – Ins and Outs: The Evergreen Appeal of Hybrid Fund Structures – Private Equity Wire</span>
+        </div>
+        <div class="news-item" data-cat="press">
+          <span class="news-date">Sep 23, 2025</span>
+          <span class="news-cat press">Press Release</span>
+          <span class="news-title">HighVista Strategies Completes Innovative Venture Capital Transaction in the Secondary Market</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Aug 25, 2025</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Luke Chan – Hidden Assets: Special Report on Asset-backed Finance – Alternative Credit Investor</span>
+        </div>
+        <div class="news-item" data-cat="podcast">
+          <span class="news-date">Aug 4, 2025</span>
+          <span class="news-cat podcast">Podcast</span>
+          <span class="news-title">Whit Matthews – Identifying Managers With a Reason to Win – Fund Flow: Emerging Managers Podcast</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Jul 22, 2025</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Luke Chan – Competition is Erasing 'Spicy' Returns for Larger ARR Loans – Creditflux</span>
+        </div>
+        <div class="news-item" data-cat="podcast">
+          <span class="news-date">Jul 9, 2025</span>
+          <span class="news-cat podcast">Podcast</span>
+          <span class="news-title">Raphi Schorr – On Identifying Alpha Trends in Private Markets – ION Analytics</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Jun 2025</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Luke Chan – More Private Debt Investors Look Beyond 'Plain Vanilla' Direct Lending – FundFire</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2024 -->
+    <div class="year-group" data-year="2024">
+      <div class="year-label">2024</div>
+      <div class="news-list">
+        <div class="news-item" data-cat="press">
+          <span class="news-date">Jul 1, 2024</span>
+          <span class="news-cat press">Press Release</span>
+          <span class="news-title">HighVista Strategies Announces Key Leadership Promotions</span>
+        </div>
+        <div class="news-item" data-cat="podcast">
+          <span class="news-date">Jun 18, 2024</span>
+          <span class="news-cat podcast">Podcast</span>
+          <span class="news-title">Luke Chan – Disruption Matters: A PEI Podcast</span>
+        </div>
+        <div class="news-item" data-cat="press">
+          <span class="news-date">May 1, 2024</span>
+          <span class="news-cat press">Press Release</span>
+          <span class="news-title">HighVista Closes Oversubscribed Private Equity Fund X</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">May 1, 2024</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">HighVista to Beat Target on 10th Fund for 'Unusually Compelling' Alpha Opportunity in Small Buyouts – Buyouts Insider</span>
+        </div>
+        <div class="news-item" data-cat="insights">
+          <span class="news-date">Apr 30, 2024</span>
+          <span class="news-cat insights">Insights</span>
+          <span class="news-title">Solving the Venture Capital Puzzle: Alpha Generation in Early-Stage Investing</span>
+        </div>
+        <div class="news-item" data-cat="podcast">
+          <span class="news-date">Apr 19, 2024</span>
+          <span class="news-cat podcast">Podcast</span>
+          <span class="news-title">Scott Reed – Private Equity Fast Pitch Podcast</span>
+        </div>
+        <div class="news-item" data-cat="insights">
+          <span class="news-date">Apr 11, 2024</span>
+          <span class="news-cat insights">Insights</span>
+          <span class="news-title">Diversifying Private Debt: The Role of Specialized Lending in Alpha Generation</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Apr 3, 2024</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Will Tech VC Funds Become the New Frontier for Private Wealth? – Wealth Management Magazine</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Mar 8, 2024</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">State of Distress: Special Report on Distressed Debt – Alternative Credit Investor</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Feb 15, 2024</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Private Debt Investor LP Perspectives 2024: Investors Confident Despite Macro Challenges</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2022 -->
+    <div class="year-group" data-year="2022">
+      <div class="year-label">2022</div>
+      <div class="news-list">
+        <div class="news-item" data-cat="press">
+          <span class="news-date">Nov 7, 2022</span>
+          <span class="news-cat press">Press Release</span>
+          <span class="news-title">HighVista Strategies Completes First Close of Specialty Private Credit Fund II</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Oct 3, 2022</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Alternative Credit Q&amp;A: Raphi Schorr on Finding Alpha in Specialty Private Credit – HighVista Strategies</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Sep 25, 2022</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Grady Campbell Announces the 2022 Top 50 PE Firms in the Middle Market™</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">May 3, 2022</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Flexibility the Key for Next-Gen Distressed Funds</span>
+        </div>
+        <div class="news-item" data-cat="podcast">
+          <span class="news-date">Mar 29, 2022</span>
+          <span class="news-cat podcast">Podcast</span>
+          <span class="news-title">Niche Credit Investing: Uncovering Alpha with HighVista Strategies' Raphael Schorr</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Mar 24, 2022</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Up and Coming Biotech Innovations Investors Should Know About</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Mar 12, 2022</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">HighVista Pinpoints Renewed Alpha Opportunities in Credit Markets</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Feb 1, 2022</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">What to Prioritize in the New Inflationary Environment</span>
+        </div>
+        <div class="news-item" data-cat="inthenews">
+          <span class="news-date">Jan 25, 2022</span>
+          <span class="news-cat inthenews">In the News</span>
+          <span class="news-title">Will the Fed Trigger a Bear Market?</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2020 -->
+    <div class="year-group" data-year="2020">
+      <div class="year-label">2020</div>
+      <div class="news-list">
+        <div class="news-item" data-cat="podcast">
+          <span class="news-date">Dec 20, 2020</span>
+          <span class="news-cat podcast">Podcast</span>
+          <span class="news-title">Pockets of Inefficiency: Alpha Generation at HighVista Strategies – Capital Allocators Podcast</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer-section">
+    <p>HighVista does not warrant the accuracy, adequacy, or completeness of the information and materials contained within the external links provided here and expressly disclaims liability for any expressed or implied representations. References to third-party publications and media outlets are provided for informational purposes only and do not constitute an endorsement by HighVista Strategies. Past performance referenced in any linked materials is not indicative of future results or alpha generation.</p>
+  </div>
+
+  <div class="cta-banner">
+    <h2>Want to learn more about<br>HighVista's alpha-driven strategies?</h2>
+    <a href="mailto:info@highvistastrategies.com" class="btn-primary">
+      Get in Touch
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a>
+        <p>An employee-owned alternative asset manager helping sophisticated investors achieve enduring alpha in structurally inefficient markets.</p>
+      </div>
+      <div class="footer-links-group">
+        <h5>Strategies</h5>
+        <ul>
+          <li><a href="multi-asset.html">Multi-Asset Alternatives</a></li>
+          <li><a href="private-credit.html">Private Credit</a></li>
+          <li><a href="private-equity.html">Private Equity</a></li>
+          <li><a href="venture-capital.html">Venture Capital</a></li>
+          <li><a href="public-markets.html">Public Markets</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-group">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#responsibility">Responsibility</a></li>
+          <li><a href="team.html">Our Team</a></li>
+          <li><a href="clients.html">Clients</a></li>
+          <li><a href="news.html">News &amp; Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-group">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">200 Clarendon St, 50th Floor</a></li>
+          <li><a href="#">Boston, MA 02116</a></li>
+          <li><a href="tel:6174066500">(617) 406-6500</a></li>
+          <li><a href="mailto:info@highvistastrategies.com">info@highvistastrategies.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 HighVista Strategies LLC. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">ADV Brochure</a>
+      </div>
+    </div>
+  </footer>
+  <div class="disclosure">
+    <p>HighVista Strategies LLC is an investment adviser registered with the U.S. Securities and Exchange Commission. Registration does not imply a certain level of skill or training. Past performance is not indicative of future results. This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities.</p>
+  </div>
+
+  <script>
+    function filterNews(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.news-item').forEach(item => {
+        if (cat === 'all' || item.dataset.cat === cat) {
+          item.style.display = 'grid';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      // Hide year groups with no visible items
+      document.querySelectorAll('.year-group').forEach(group => {
+        const visible = Array.from(group.querySelectorAll('.news-item')).some(i => i.style.display !== 'none');
+        group.style.display = visible ? 'block' : 'none';
+      });
+    }
+  </script>
+
+  <script>
+    (function() {
+      var page = window.location.pathname.split('/').pop() || 'highvista_redesign.html';
+      document.querySelectorAll('.nav-links a').forEach(function(a) {
+        var href = (a.getAttribute('href') || '').split('#')[0];
+        if (href && href === page) { a.classList.add('nav-active'); }
+      });
+    })();
+  </script>
+</body>
+</html>

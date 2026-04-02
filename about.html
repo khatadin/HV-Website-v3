@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us – HighVista Strategies</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1f3c; --navy-mid: #162d52;
+      --accent: #0a8fa3; --accent-lt: #1aaec4;
+      --cream: #f7f4ef; --light: #ffffff;
+      --text: #1a1a2e; --muted: #6b7280; --border: #e2ddd6;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--light); line-height: 1.7; font-size: 16px; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; height: 100px; background: rgba(13,31,60,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(10,143,163,0.2); }
+    .nav-logo { font-family: 'EB Garamond', serif; font-size: 1.35rem; font-weight: 500; color: var(--light); letter-spacing: 0.02em; text-decoration: none; }
+    .nav-logo span { color: var(--accent-lt); }
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links a { color: rgba(255,255,255,0.78); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent-lt); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a::after { content: ' ▾'; font-size: 0.65rem; }
+    .nav-dropdown-menu { position: absolute; top: calc(100% + 12px); left: 0; background: var(--navy); min-width: 240px; padding: 8px 0; opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0.2s; border-top: 2px solid var(--accent); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .nav-dropdown:hover .nav-dropdown-menu { opacity: 1; visibility: visible; }
+    .nav-dropdown-menu a { display: block; padding: 10px 20px; font-size: 0.8rem; color: rgba(255,255,255,0.65); letter-spacing: 0.05em; transition: background 0.15s, color 0.15s; text-transform: none; }
+    .nav-dropdown-menu a:hover { background: rgba(255,255,255,0.05); color: var(--accent-lt); }
+    .nav-dropdown-menu .sub-label { display: block; padding: 10px 20px 4px; font-size: 0.65rem; color: rgba(255,255,255,0.3); letter-spacing: 0.12em; text-transform: uppercase; }
+    .nav-cta { background: transparent !important; border: 1px solid var(--accent); color: var(--accent) !important; padding: 8px 20px; border-radius: 2px; transition: background 0.2s, color 0.2s !important; }
+    .nav-cta:hover { background: var(--accent) !important; color: var(--light) !important; }
+
+    /* PAGE HERO */
+    .page-hero { padding: 164px 60px 80px; min-height: 440px; background: var(--navy); position: relative; overflow: hidden; }
+    .page-hero::after { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(10,143,163,0.08) 0%, transparent 70%); }
+    .breadcrumb { position: relative; z-index: 1; display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+    .breadcrumb a, .breadcrumb span { font-size: 0.75rem; color: rgba(255,255,255,0.4); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; }
+    .breadcrumb a:hover { color: var(--accent-lt); }
+    .breadcrumb-sep { color: rgba(255,255,255,0.2); font-size: 0.65rem; }
+    .page-eyebrow { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 12px; color: var(--accent-lt); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 16px; }
+    .page-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
+    .page-hero h1 { position: relative; z-index: 1; font-family: 'EB Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 400; color: var(--light); line-height: 1.2; margin-bottom: 20px; }
+    .page-hero p { position: relative; z-index: 1; color: rgba(255,255,255,0.6); font-size: 1.05rem; font-weight: 300; max-width: 580px; line-height: 1.8; }
+
+    /* SECTIONS */
+    section { padding: 90px 60px; }
+    .section-eyebrow { display: inline-flex; align-items: center; gap: 12px; color: var(--accent); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 20px; }
+    .section-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
+    .section-title { font-family: 'EB Garamond', serif; font-size: clamp(1.9rem, 3vw, 2.6rem); font-weight: 400; color: var(--navy); line-height: 1.2; margin-bottom: 20px; }
+    .section-lead { color: var(--muted); font-size: 1rem; font-weight: 300; max-width: 600px; line-height: 1.8; }
+
+    /* ABOUT STORY */
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 56px; }
+    .story-body p { color: #444; font-size: 1rem; line-height: 1.85; margin-bottom: 20px; }
+    .story-aside { display: flex; flex-direction: column; gap: 32px; }
+    .highlight-box { border-left: 3px solid var(--accent); padding: 24px 28px; background: var(--cream); }
+    .highlight-box .quote { font-family: 'EB Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--navy); line-height: 1.5; margin-bottom: 12px; }
+    .highlight-box .attr { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* TIMELINE */
+    #milestones { background: var(--cream); }
+    .timeline { margin-top: 56px; display: flex; flex-direction: column; gap: 0; }
+    .timeline-item { display: grid; grid-template-columns: 120px 1fr; gap: 40px; padding: 32px 0; border-top: 1px solid var(--border); }
+    .timeline-item:last-child { border-bottom: 1px solid var(--border); }
+    .timeline-year { font-family: 'EB Garamond', serif; font-size: 1.8rem; color: var(--accent); line-height: 1; padding-top: 4px; }
+    .timeline-content h4 { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+    .timeline-content p { font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
+
+    /* FIRM EDGE */
+    #firm-edge { background: var(--cream); }
+    .edge-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); margin-top: 56px; }
+    .edge-card { background: var(--light); padding: 48px 44px; transition: background 0.2s; }
+    .edge-card:hover { background: #fff; }
+    .edge-num { font-family: 'EB Garamond', serif; font-size: 2.8rem; color: var(--accent); opacity: 0.35; line-height: 1; margin-bottom: 20px; }
+    .edge-card h4 { font-family: 'EB Garamond', serif; font-size: 1.25rem; color: var(--navy); margin-bottom: 14px; font-weight: 500; }
+    .edge-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.8; }
+
+    /* VALUES / CULTURE */
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); margin-top: 56px; }
+    .value-card { background: var(--light); padding: 40px 32px; transition: background 0.2s; }
+    .value-card:hover { background: var(--cream); }
+    .value-icon { width: 40px; height: 40px; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--accent); border-radius: 2px; }
+    .value-card h4 { font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--navy); margin-bottom: 12px; }
+    .value-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.75; }
+
+    /* RESPONSIBILITY */
+    #responsibility { background: var(--cream); }
+    .resp-intro { max-width: 720px; margin-bottom: 56px; }
+    .resp-intro p { color: var(--muted); font-size: 1rem; font-weight: 300; line-height: 1.85; }
+    .resp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); }
+    .resp-card { background: var(--light); padding: 44px 36px; transition: background 0.2s; }
+    .resp-card:hover { background: #fff; }
+    .resp-card-icon { width: 44px; height: 44px; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; color: var(--accent); border-radius: 2px; }
+    .resp-card h4 { font-family: 'EB Garamond', serif; font-size: 1.25rem; color: var(--navy); margin-bottom: 14px; font-weight: 500; }
+    .resp-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.8; }
+
+    /* STATS */
+    #stats { background: var(--navy); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); margin-top: 56px; }
+    .stat-box { background: var(--navy); padding: 48px 32px; text-align: center; }
+    .stat-value { font-family: 'EB Garamond', serif; font-size: 2.8rem; color: var(--accent-lt); line-height: 1; margin-bottom: 10px; }
+    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.45); letter-spacing: 0.08em; text-transform: uppercase; }
+    #stats .section-title { color: var(--light); }
+    #stats .section-lead { color: rgba(255,255,255,0.55); }
+
+    /* CTA */
+    .cta-banner { background: var(--navy-mid); padding: 80px 60px; display: flex; align-items: center; justify-content: space-between; gap: 40px; border-top: 1px solid rgba(10,143,163,0.2); border-bottom: 1px solid rgba(10,143,163,0.2); }
+    .cta-banner h2 { font-family: 'EB Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); color: var(--light); font-weight: 400; max-width: 560px; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--light); padding: 14px 32px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background 0.2s, transform 0.15s; }
+    .btn-primary:hover { background: var(--accent-lt); transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer { background: var(--navy); padding: 60px 60px 40px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 60px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .footer-brand .nav-logo { display: block; margin-bottom: 16px; font-size: 1.2rem; }
+    .footer-brand p { color: rgba(255,255,255,0.4); font-size: 0.85rem; line-height: 1.7; max-width: 280px; }
+    .footer-links-group h5 { color: var(--accent-lt); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 18px; }
+    .footer-links-group ul { list-style: none; }
+    .footer-links-group li { margin-bottom: 10px; }
+    .footer-links-group a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .footer-links-group a:hover { color: var(--accent-lt); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; }
+    .footer-bottom p { color: rgba(255,255,255,0.28); font-size: 0.78rem; }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { color: rgba(255,255,255,0.28); font-size: 0.78rem; text-decoration: none; transition: color 0.2s; }
+    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+    .disclosure { background: #f0ede8; padding: 28px 60px; border-top: 1px solid var(--border); }
+    .disclosure p { font-size: 0.72rem; color: #999; line-height: 1.6; }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; } .nav-links { display: none; }
+      section, .page-hero, .cta-banner { padding-left: 24px; padding-right: 24px; }
+      .story-grid { grid-template-columns: 1fr; gap: 40px; }
+      .edge-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+      .resp-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .timeline-item { grid-template-columns: 80px 1fr; gap: 20px; }
+      .footer-top { flex-direction: column; gap: 36px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .cta-banner { flex-direction: column; text-align: center; }
+      .disclosure { padding: 24px; }
+    }
+  .hero-mountain{position:absolute;right:0;top:0;height:100%;width:58%;pointer-events:none;object-fit:cover;object-position:left top;-webkit-mask-image:linear-gradient(to right,transparent 0%,black 18%);mask-image:linear-gradient(to right,transparent 0%,black 18%);opacity:0.9;}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a>
+    <ul class="nav-links">
+            <li class="nav-dropdown">
+        <a href="about.html">About</a>
+        <div class="nav-dropdown-menu">
+          <a href="about.html#firm-edge">Firm Edge</a>
+          <a href="about.html#culture">Culture</a>
+          <a href="about.html#milestones">History</a>
+          <a href="team.html">Our Team</a>
+          <a href="about.html#responsibility">Responsibility</a>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="#">Strategies</a>
+        <div class="nav-dropdown-menu">
+          <span class="sub-label">All Strategies</span>
+          <a href="multi-asset.html">Multi-Asset Alternatives</a>
+          <span class="sub-label">Private Markets</span>
+          <a href="private-credit.html">Private Credit</a>
+          <a href="private-equity.html">Lower Middle Market PE</a>
+          <a href="venture-capital.html">Early-Stage Venture Capital</a>
+          <span class="sub-label">Public Markets</span>
+          <a href="public-markets.html">Differentiated Public Markets</a>
+        </div>
+      </li>
+      <li><a href="team.html">Our Team</a></li>
+      <li><a href="clients.html">Clients</a></li>
+      <li><a href="news.html">News &amp; Insights</a></li>
+      <li><a href="mailto:info@highvistastrategies.com" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=85&fit=crop" class="hero-mountain" alt="">
+    <div class="breadcrumb">
+      <a href="highvista_redesign.html">Home</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>About Us</span>
+    </div>
+    <div class="page-eyebrow">Our Story</div>
+    <h1>Built on Conviction,<br>Driven by Curiosity</h1>
+    <p>HighVista Strategies is an employee-owned alternative asset manager with a singular mission: to help sophisticated investors achieve enduring, outsized alpha in structurally inefficient markets.</p>
+  </div>
+
+  <!-- STORY -->
+  <section id="story">
+    <div class="section-eyebrow">Who We Are</div>
+    <h2 class="section-title">Twenty Years of Disciplined<br>Alternative Investing</h2>
+    <div class="story-grid">
+      <div class="story-body">
+        <p>Founded in Boston in 2004, HighVista Strategies was built on a simple but powerful thesis: the most durable investment alpha is found in corners of the market where structural inefficiencies persist — areas that are underfollowed, undercapitalized, or simply harder to access than the mainstream.</p>
+        <p>We began investing on behalf of clients in 2005 with a commingled multi-asset class, multi-alternatives offering. That multi-asset capability remains the backbone of HighVista's investment program today, and we have continuously expanded our platform to offer specialized strategies in both private and public markets.</p>
+        <p>In 2023, HighVista acquired the abrdn U.S. private markets business, significantly expanding our private equity, private credit, and venture capital capabilities. Today, we manage over $11.5 billion on behalf of clients globally, with a senior leadership group of twelve and a culture built on intellectual rigor and long-term alpha generation.</p>
+        <p>As a 100% employee-owned firm, every member of our team has a direct stake in delivering outstanding outcomes for our clients. Our interests are genuinely aligned — we invest our own capital alongside the investors we serve.</p>
+      </div>
+      <div class="story-aside">
+        <div class="highlight-box">
+          <div class="quote">"We focus on less competitive, less efficient areas of the markets — structurally attractive ponds to fish in."</div>
+          <div class="attr">André Perold, Co-Founder & Chief Investment Officer</div>
+        </div>
+        <div class="highlight-box">
+          <div class="quote">"Our culture rewards inquisitive thinking, intellectual honesty, and the courage to pursue differentiated ideas."</div>
+          <div class="attr">HighVista Investment Philosophy</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MILESTONES -->
+  <section id="milestones">
+    <div class="section-eyebrow">Our History</div>
+    <h2 class="section-title">Two Decades of Growth</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">2004</div>
+        <div class="timeline-content">
+          <h4>Founded in Boston</h4>
+          <p>André Perold and Daniel Jick co-found HighVista Strategies with a vision to build a disciplined, research-driven alternative asset manager focused on structurally inefficient markets.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2005</div>
+        <div class="timeline-content">
+          <h4>First Client Investments</h4>
+          <p>HighVista begins investing on behalf of clients through its flagship multi-asset class, multi-alternatives offering — a strategy that continues to serve as the firm's investment backbone.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2010s</div>
+        <div class="timeline-content">
+          <h4>Platform Expansion</h4>
+          <p>HighVista expands its private equity franchise to over a decade of consistent performance in the lower middle market, launching multiple oversubscribed fund vintages and building a reputation for access to hard-to-reach opportunities.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-content">
+          <h4>Private Credit Fund II at $450M</h4>
+          <p>HighVista closes its second opportunistic private credit fund at $450 million, reinforcing its commitment to specialized lending and off-the-run credit opportunities in undercapitalized market segments.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-content">
+          <h4>Acquisition of abrdn U.S. Private Markets Business</h4>
+          <p>HighVista acquires the abrdn U.S. private markets business, significantly expanding its private equity, private credit, and early-stage venture capital teams and capabilities.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-content">
+          <h4>20 Years of Pursuing Alpha & Fund X Close</h4>
+          <p>HighVista celebrates its 20th anniversary and closes Private Equity Fund X at $675 million, oversubscribed, demonstrating continued strong investor demand for the firm's lower middle market approach.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-content">
+          <h4>$11.5B AUM & Fund XI at $800M</h4>
+          <p>HighVista surpasses $11.5 billion in assets under management. Private Equity Fund XI closes oversubscribed at $800 million, and the venture capital team raises $270 million for its latest fund.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <!-- FIRM EDGE -->
+  <section id="firm-edge">
+    <div class="section-eyebrow">Our Competitive Advantage</div>
+    <h2 class="section-title">The HighVista Edge</h2>
+    <p class="section-lead">HighVista's approach to generating alpha is built on four enduring strengths that create a durable competitive advantage across market cycles.</p>
+    <div class="edge-grid">
+
+      <div class="edge-card">
+        <div class="edge-num">01</div>
+        <h4>Alpha Driven Focus</h4>
+        <p>We are opportunistic and focused on finding less competitive and less efficient areas of the markets, which we view to be structurally attractive "ponds" to fish in. These areas require specialized skillsets to access and diligence.</p>
+      </div>
+
+      <div class="edge-card">
+        <div class="edge-num">02</div>
+        <h4>Experienced and Networked</h4>
+        <p>We have a long history of putting capital to work across a wide range of alternative investment opportunities. Over decades we have built a valuable network of partners, peer investors and other market participants, which significantly aid in our ability to uncover, source, and evaluate investments with a relative value mindset.</p>
+      </div>
+
+      <div class="edge-card">
+        <div class="edge-num">03</div>
+        <h4>Flexible Structuring and Superior Execution</h4>
+        <p>We seek to find the best way to build robust portfolios with flexibility to invest via joint ventures, co-investments, secondaries, special-purpose vehicles, primary funds and other bespoke arrangements. Our broad platform capability enables us to structure investment opportunities in a highly flexible and accretive fashion.</p>
+      </div>
+
+      <div class="edge-card">
+        <div class="edge-num">04</div>
+        <h4>Alignment</h4>
+        <p>We build strong alignment with our clients and investment partners alike. With meaningful personal investment alongside our clients, we foster a shared commitment to long-term success and a durable partnership with our investors.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CULTURE -->
+  <section id="culture">
+    <div class="section-eyebrow">Our Culture</div>
+    <h2 class="section-title">The Values That Define Us</h2>
+    <p class="section-lead">Our culture is not a set of platitudes — it is the operating system that drives how we think, invest, and serve our clients every day.</p>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h4>Long-Term Orientation</h4>
+        <p>We invest with a long time horizon, resisting short-term pressures in favor of enduring alpha. Our employee-ownership model ensures our incentives are calibrated to the same horizon as our clients.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h4>Intellectual Honesty</h4>
+        <p>We encourage dissent and debate. Every investment thesis must withstand rigorous challenge, and we reward the courage to hold differentiated views even when they run counter to consensus.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>
+        </div>
+        <h4>Client Alignment</h4>
+        <p>We co-invest alongside our clients in every strategy we offer. Our success is inseparable from theirs — a principle that shapes every decision we make from portfolio construction to risk management.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESPONSIBILITY -->
+  <section id="responsibility">
+    <div class="section-eyebrow">Responsibility</div>
+    <h2 class="section-title">How We Operate</h2>
+    <div class="resp-intro">
+      <p>Generating alpha for our clients is our singular investment purpose — and we recognize that achieving it responsibly requires a commitment to principled decision-making, an inclusive team, and active engagement in the communities where we work and live.</p>
+    </div>
+    <div class="resp-grid">
+      <div class="resp-card">
+        <div class="resp-card-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h4>Our Investing</h4>
+        <p>HighVista's sole focus is generating attractive, sustainable alpha for our clients over the long term. As a steward of their capital, we recognize that every investment decision carries the potential to create or diminish that alpha. This understanding drives our commitment to thoughtful decision-making, principled investment practices, and careful consideration of material risks in any investment we may make.</p>
+      </div>
+      <div class="resp-card">
+        <div class="resp-card-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>
+        </div>
+        <h4>Our Team</h4>
+        <p>We are committed to building and nurturing an inclusive workplace with a team that brings diversity of backgrounds and experiences. We invest in our people — our greatest asset — and believe that a breadth of perspectives and inputs leads to better alpha generation and better outcomes for our clients and the firm.</p>
+      </div>
+      <div class="resp-card">
+        <div class="resp-card-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h4>Our Community</h4>
+        <p>Our responsibility as a firm extends beyond the portfolio to the communities in which we operate. We encourage team members to support local charitable organizations through philanthropy and active engagement, and we cultivate opportunities for the team to volunteer together throughout the year. Many colleagues serve on Boards and Investment Committees where they provide governance and investment guidance for non-profit organizations doing important work in our communities.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="section-eyebrow">By the Numbers</div>
+    <h2 class="section-title">HighVista at a Glance</h2>
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-value">$11.5B+</div><div class="stat-label">Assets Under Management</div></div>
+      <div class="stat-box"><div class="stat-value">20+</div><div class="stat-label">Years of Track Record</div></div>
+      <div class="stat-box"><div class="stat-value">100%</div><div class="stat-label">Employee Owned</div></div>
+      <div class="stat-box"><div class="stat-value">12</div><div class="stat-label">Senior Partners</div></div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Want to learn more about<br>partnering with HighVista?</h2>
+    <a href="mailto:info@highvistastrategies.com" class="btn-primary">
+      Get in Touch
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a>
+        <p>An employee-owned alternative asset manager helping sophisticated investors achieve enduring alpha in structurally inefficient markets.</p>
+      </div>
+      <div class="footer-links-group">
+        <h5>Strategies</h5>
+        <ul>
+          <li><a href="multi-asset.html">Multi-Asset Alternatives</a></li>
+          <li><a href="private-credit.html">Private Credit</a></li>
+          <li><a href="private-equity.html">Private Equity</a></li>
+          <li><a href="venture-capital.html">Venture Capital</a></li>
+          <li><a href="public-markets.html">Public Markets</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-group">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="team.html">Our Team</a></li>
+          <li><a href="clients.html">Clients</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-group">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">Boston, Massachusetts</a></li>
+          <li><a href="mailto:info@highvistastrategies.com">info@highvistastrategies.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 HighVista Strategies LLC. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">ADV Brochure</a>
+      </div>
+    </div>
+  </footer>
+  <div class="disclosure">
+    <p>HighVista Strategies LLC is an investment adviser registered with the U.S. Securities and Exchange Commission. Registration does not imply a certain level of skill or training. Past performance is not indicative of future results. This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. Investing involves risk, including the possible loss of principal.</p>
+  </div>
+  <script>
+    (function() {
+      var page = window.location.pathname.split('/').pop() || 'highvista_redesign.html';
+      document.querySelectorAll('.nav-links a').forEach(function(a) {
+        var href = (a.getAttribute('href') || '').split('#')[0];
+        if (href && href === page) { a.classList.add('nav-active'); }
+      });
+    })();
+  </script>
+</body>
+</html>

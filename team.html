@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Team – HighVista Strategies</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy:#0d1f3c;--navy-mid:#162d52;--accent:#0a8fa3;--accent-lt:#1aaec4;--cream:#f7f4ef;--light:#ffffff;--text:#1a1a2e;--muted:#6b7280;--border:#e2ddd6; }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Inter',sans-serif;color:var(--text);background:var(--light);line-height:1.7;font-size:16px; }
+
+    /* NAV */
+    nav { position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:100px;background:rgba(13,31,60,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(10,143,163,0.2); }
+    .nav-logo { font-family:'EB Garamond',serif;font-size:1.35rem;font-weight:500;color:var(--light);letter-spacing:0.02em;text-decoration:none; }
+    .nav-links { display:flex;gap:36px;list-style:none;align-items:center; }
+    .nav-links a,.nav-links a:visited { color:rgba(255,255,255,0.78);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s; }
+    .nav-links a:hover { color:var(--accent-lt); }
+    .nav-links a.nav-active { color:var(--accent-lt); }
+    .nav-dropdown { position:relative; }
+    .nav-dropdown > a::after { content:' ▾';font-size:0.65rem; }
+    .nav-dropdown-menu { position:absolute;top:calc(100% + 12px);left:0;background:var(--navy);min-width:240px;padding:8px 0;opacity:0;visibility:hidden;transition:opacity 0.2s,visibility 0.2s;border-top:2px solid var(--accent);box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+    .nav-dropdown:hover .nav-dropdown-menu { opacity:1;visibility:visible; }
+    .nav-dropdown-menu a { display:block;padding:10px 20px;font-size:0.8rem;color:rgba(255,255,255,0.65);letter-spacing:0.05em;transition:background 0.15s,color 0.15s;text-transform:none; }
+    .nav-dropdown-menu a:hover { background:rgba(255,255,255,0.05);color:var(--accent-lt); }
+    .nav-dropdown-menu .sub-label { display:block;padding:10px 20px 4px;font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:0.12em;text-transform:uppercase; }
+    .nav-cta { background:transparent!important;border:1px solid var(--accent);color:var(--accent)!important;padding:8px 20px;border-radius:2px;transition:background 0.2s,color 0.2s!important; }
+    .nav-cta:hover { background:var(--accent)!important;color:var(--light)!important; }
+
+    /* PAGE HERO */
+    .page-hero { padding:164px 60px 80px;min-height:440px;background:var(--navy);position:relative;overflow:hidden; }
+    .page-hero::after { content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none; }
+    .page-hero::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(10,143,163,0.08) 0%,transparent 70%); }
+    .hero-mountain { position:absolute;right:0;top:0;height:100%;width:58%;pointer-events:none;object-fit:cover;object-position:left top;-webkit-mask-image:linear-gradient(to right,transparent 0%,black 18%);mask-image:linear-gradient(to right,transparent 0%,black 18%);opacity:0.9; }
+    .breadcrumb { position:relative;z-index:1;display:flex;align-items:center;gap:8px;margin-bottom:24px; }
+    .breadcrumb a, .breadcrumb span { font-size:0.75rem;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase; }
+    .breadcrumb a:hover { color:var(--accent-lt); }
+    .breadcrumb-sep { color:rgba(255,255,255,0.2);font-size:0.65rem; }
+    .page-eyebrow { position:relative;z-index:1;display:inline-flex;align-items:center;gap:12px;color:var(--accent-lt);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px; }
+    .page-eyebrow::before { content:'';display:block;width:28px;height:1px;background:var(--accent); }
+    .page-hero h1 { position:relative;z-index:1;font-family:'EB Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:400;color:var(--light);line-height:1.2;margin-bottom:20px; }
+    .page-hero p { position:relative;z-index:1;color:rgba(255,255,255,0.6);font-size:1.05rem;font-weight:300;max-width:580px;line-height:1.8; }
+
+    /* SHARED */
+    section { padding:90px 60px; }
+    .section-eyebrow { display:inline-flex;align-items:center;gap:12px;color:var(--accent);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px; }
+    .section-eyebrow::before { content:'';display:block;width:28px;height:1px;background:var(--accent); }
+    .section-title { font-family:'EB Garamond',serif;font-size:clamp(1.9rem,3vw,2.6rem);font-weight:400;color:var(--navy);line-height:1.2;margin-bottom:20px; }
+    .section-lead { color:var(--muted);font-size:1rem;font-weight:300;max-width:660px;line-height:1.8; }
+
+    /* ── PARTNERS GRID ── */
+    #partners { background:var(--light); }
+    .partners-grid { display:grid;grid-template-columns:repeat(6,1fr);gap:2px;background:var(--border);border:1px solid var(--border);margin-top:56px; }
+    .partner-card { background:var(--light);transition:background 0.2s;cursor:default; }
+    .partner-card:hover { background:var(--cream); }
+    .photo-avatar { width:100%;aspect-ratio:1/1;background:var(--navy-mid);display:flex;align-items:center;justify-content:center;transition:background 0.2s;position:relative;overflow:hidden; }
+    .bio-overlay { position:absolute;inset:0;background:rgba(13,31,60,0.92);color:rgba(255,255,255,0.88);font-size:0.72rem;line-height:1.65;padding:18px;opacity:0;transition:opacity 0.25s;display:flex;align-items:center;pointer-events:none; }
+    .partner-card:hover .bio-overlay { opacity:1; }
+    .photo-avatar span { font-family:'EB Garamond',serif;font-size:1.8rem;font-weight:500;color:rgba(255,255,255,0.5);letter-spacing:0.04em; }
+    .partner-card:hover .photo-avatar { background:var(--navy); }
+    .photo-avatar img { width:100%;height:100%;object-fit:cover;object-position:top center;display:block; }
+    .partner-info { padding:16px 16px 20px; }
+    .partner-info .role { font-size:0.62rem;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--accent);margin-bottom:5px;line-height:1.4; }
+    .partner-info h3 { font-family:'EB Garamond',serif;font-size:1rem;color:var(--navy);font-weight:500;line-height:1.3; }
+
+    /* ── TEAM SELECTOR ── */
+    #teams { background:var(--cream);padding-bottom:0; }
+    .team-boxes { display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:48px; }
+    .team-box { background:var(--light);border:1px solid var(--border);padding:32px 20px 28px;cursor:pointer;transition:all 0.2s;text-align:center;border-bottom:3px solid transparent;user-select:none; }
+    .team-box:hover { border-color:var(--accent);box-shadow:0 4px 20px rgba(10,143,163,0.1); }
+    .team-box.active { border-color:var(--accent);border-bottom-color:var(--accent);background:var(--navy); }
+    .team-box.active .team-box-label { color:rgba(255,255,255,0.45); }
+    .team-box.active h4 { color:var(--light); }
+    .team-box.active .team-box-count { background:rgba(255,255,255,0.1);color:var(--accent-lt); }
+    .team-box-count { display:inline-block;font-size:0.65rem;font-weight:600;letter-spacing:0.06em;color:var(--accent);background:rgba(10,143,163,0.08);padding:2px 8px;border-radius:20px;margin-bottom:14px; }
+    .team-box h4 { font-family:'EB Garamond',serif;font-size:1.05rem;color:var(--navy);font-weight:500;margin-bottom:6px; }
+    .team-box-label { font-size:0.7rem;color:var(--muted);letter-spacing:0.03em;line-height:1.5; }
+
+    /* ── TEAM PANELS ── */
+    .team-panel { display:none;background:var(--cream);padding:60px 60px 80px;border-top:1px solid var(--border); }
+    .team-panel.active { display:block; }
+    .team-panel-header { margin-bottom:48px;padding-bottom:36px;border-bottom:1px solid var(--border); }
+    .team-panel-header h3 { font-family:'EB Garamond',serif;font-size:clamp(1.6rem,2.5vw,2.1rem);color:var(--navy);font-weight:400;margin-bottom:10px; }
+    .team-panel-header p { color:var(--muted);font-size:0.95rem;max-width:680px;line-height:1.85; }
+    .members-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:24px; }
+    .member-card { background:var(--light);border:1px solid var(--border);overflow:hidden;transition:box-shadow 0.2s; }
+    .member-card:hover { box-shadow:0 8px 32px rgba(13,31,60,0.1); }
+    .photo-avatar--lg { aspect-ratio:4/5; }
+    .photo-avatar--lg span { font-size:2.4rem; }
+    .member-card:hover .photo-avatar { background:var(--navy); }
+    .member-info { padding:22px 22px 26px; }
+    .member-info .role { font-size:0.66rem;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;line-height:1.5; }
+    .member-info h4 { font-family:'EB Garamond',serif;font-size:1.1rem;color:var(--navy);font-weight:500;margin-bottom:10px; }
+    .member-info p { font-size:0.82rem;color:var(--muted);line-height:1.75; }
+
+    /* CTA / FOOTER */
+    .cta-banner { background:var(--navy-mid);padding:80px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;border-top:1px solid rgba(10,143,163,0.2);border-bottom:1px solid rgba(10,143,163,0.2); }
+    .cta-banner h2 { font-family:'EB Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--light);font-weight:400;max-width:560px; }
+    .btn-primary { display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--light);padding:14px 32px;font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.15s; }
+    .btn-primary:hover { background:var(--accent-lt);transform:translateY(-1px); }
+    footer { background:var(--navy);padding:60px 60px 40px;border-top:1px solid rgba(255,255,255,0.06); }
+    .footer-top { display:flex;justify-content:space-between;align-items:flex-start;gap:60px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08); }
+    .footer-brand p { color:rgba(255,255,255,0.4);font-size:0.85rem;line-height:1.7;max-width:280px;margin-top:16px; }
+    .footer-links-group h5 { color:var(--accent-lt);font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:18px; }
+    .footer-links-group ul { list-style:none; }
+    .footer-links-group li { margin-bottom:10px; }
+    .footer-links-group a { color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.875rem;transition:color 0.2s; }
+    .footer-links-group a:hover { color:var(--accent-lt); }
+    .footer-bottom { display:flex;justify-content:space-between;align-items:center;padding-top:28px; }
+    .footer-bottom p { color:rgba(255,255,255,0.28);font-size:0.78rem; }
+    .footer-legal { display:flex;gap:24px; }
+    .footer-legal a { color:rgba(255,255,255,0.28);font-size:0.78rem;text-decoration:none; }
+    .footer-legal a:hover { color:rgba(255,255,255,0.6); }
+    .disclosure { background:#f0ede8;padding:28px 60px;border-top:1px solid var(--border); }
+    .disclosure p { font-size:0.72rem;color:#999;line-height:1.6; }
+
+    @media(max-width:1200px) {
+      .partners-grid { grid-template-columns:repeat(4,1fr); }
+      .team-boxes { grid-template-columns:repeat(3,1fr); }
+      .members-grid { grid-template-columns:repeat(3,1fr); }
+    }
+    @media(max-width:768px) {
+      nav { padding:0 24px; } .nav-links { display:none; }
+      section, .page-hero, .cta-banner, .team-panel { padding-left:24px;padding-right:24px; }
+      .partners-grid { grid-template-columns:repeat(2,1fr); }
+      .team-boxes { grid-template-columns:repeat(2,1fr); }
+      .members-grid { grid-template-columns:repeat(2,1fr); }
+      .footer-top { flex-direction:column;gap:36px; }
+      .footer-bottom { flex-direction:column;gap:12px;text-align:center; }
+      .cta-banner { flex-direction:column;text-align:center; }
+      .disclosure { padding:24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a>
+    <ul class="nav-links">
+      <li class="nav-dropdown">
+        <a href="about.html">About</a>
+        <div class="nav-dropdown-menu">
+          <a href="about.html#firm-edge">Firm Edge</a>
+          <a href="about.html#culture">Culture</a>
+          <a href="about.html#milestones">History</a>
+          <a href="team.html">Our Team</a>
+          <a href="about.html#responsibility">Responsibility</a>
+        </div>
+      </li>
+      <li class="nav-dropdown"><a href="#">Strategies</a>
+        <div class="nav-dropdown-menu">
+          <span class="sub-label">All Strategies</span>
+          <a href="multi-asset.html">Multi-Asset Alternatives</a>
+          <span class="sub-label">Private Markets</span>
+          <a href="private-credit.html">Private Credit</a>
+          <a href="private-equity.html">Lower Middle Market PE</a>
+          <a href="venture-capital.html">Early-Stage Venture Capital</a>
+          <span class="sub-label">Public Markets</span>
+          <a href="public-markets.html">Differentiated Public Markets</a>
+        </div>
+      </li>
+      <li><a href="team.html">Our Team</a></li>
+      <li><a href="clients.html">Clients</a></li>
+      <li><a href="news.html">News &amp; Insights</a></li>
+      <li><a href="mailto:info@highvistastrategies.com" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=85&fit=crop" class="hero-mountain" alt="">
+    <div class="breadcrumb">
+      <a href="highvista_redesign.html">Home</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>Our Team</span>
+    </div>
+    <div class="page-eyebrow">Leadership</div>
+    <h1>People Behind<br>the Performance</h1>
+    <p>HighVista's twelve partners bring together exceptional depth across alternative investing, institutional portfolio management, and firm leadership — united by a shared culture of intellectual rigor and long-term alignment.</p>
+  </div>
+
+  <!-- ── ALL PARTNERS ── -->
+  <section id="partners">
+    <div class="section-eyebrow">Firm Partners</div>
+    <h2 class="section-title">Our Partners</h2>
+    <p class="section-lead">HighVista is 100% employee-owned. Every partner has a meaningful stake in the firm's long-term success and a direct personal alignment with client outcomes.</p>
+
+    <div class="partners-grid">
+
+      <div class="partner-card">
+        <div class="photo-avatar"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Andre-P_1083.jpg" alt="André Perold" loading="lazy"><div class="bio-overlay">André is a Co-Founder and CIO of HighVista Strategies. He is also the George Gund Professor of Finance and Banking, Emeritus, at Harvard Business School, where he spent over three decades and served as Senior Associate Dean and Chair of the Finance Faculty.</div></div>
+        <div class="partner-info">
+          <div class="role">Co-Founder &amp; Chief Investment Officer</div>
+          <h3>André F. Perold</h3>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="photo-avatar"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Raphael_9610.jpg" alt="Raphi Schorr" loading="lazy"><div class="bio-overlay">Raphi joined HighVista shortly after the firm's founding and has been central to its investment team throughout its evolution. As Deputy CIO, he plays a leading role in portfolio construction, cross-strategy risk oversight, and management of the multi-asset alternatives strategy.</div></div>
+        <div class="partner-info">
+          <div class="role">Partner &amp; Deputy Chief Investment Officer</div>
+          <h3>Raphi Schorr</h3>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="photo-avatar"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Luke-C_0295.jpg" alt="Luke Chan" loading="lazy"><div class="bio-overlay">Luke leads HighVista's private credit platform and its investing across specialty private credit and opportunistic credit verticals. He also plays a central role in the firm's strategic capital activities and sits on the Private Credit Investment Committee.</div></div>
+        <div class="partner-info">
+          <div class="role">Partner &amp; Co-Head of Private Credit</div>
+          <h3>Luke Chan</h3>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="photo-avatar"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Ben-R_1097.jpg" alt="Ben Radinsky" loading="lazy"><div class="bio-overlay">Ben co-leads HighVista's private credit strategy and is a member of the Private Credit Investment Committee. He joined the firm in 2021 and brings over 20 years of relevant experience across specialty lending, structured credit, and opportunistic credit markets.</div></div>
+        <div class="partner-info">
+          <div class="role">Partner &amp; Co-Head of Private Credit</div>
+          <h3>Ben Radinsky</h3>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="photo-avatar"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Dickie_John.jpg" alt="John Dickie" loading="lazy"><div class="bio-overlay">John co-leads HighVista's lower middle market private equity platform, overseeing the firm's flagship buyout fund series. He brings extensive experience sourcing, underwriting, and managing control investments in small, privately held U.S. companies.</div></div>
+        <div class="partner-info">
+          <div class="role">Partner &amp; Co-Head of Private Equity</div>
+          <h3>John Dickie</h3>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="photo-avatar"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/12/Scott_2769.jpg" alt="Scott Reed" loading="lazy"><div class="bio-overlay">Scott co-leads HighVista's private equity strategy. He joined the firm in 2023 as part of the acquisition of the abrdn U.S. private markets business, bringing deep lower middle market deal expertise and a strong track record across the firm's buyout platform.</div></div>
+        <div class="partner-info">
+          <div class="role">Partner &amp; Co-Head of Private Equity</div>
+          <h3>Scott Reed</h3>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="photo-avatar"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Kirsten-Morin.jpg" alt="Kirsten Morin" loading="lazy"><div class="bio-overlay">Kirsten co-leads HighVista's venture capital strategy with a focus on fund selection and portfolio construction across AI, life sciences, fintech, and enterprise software. She joined HighVista in 2023 as part of the abrdn U.S. private markets acquisition.</div></div>
+        <div class="partner-info">
+          <div class="role">Partner &amp; Co-Head of Venture Capital</div>
+          <h3>Kirsten Morin</h3>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="photo-avatar"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Neils_9547.jpg" alt="Niels Peetz-Larsen" loading="lazy"><div class="bio-overlay">Niels co-leads public markets at HighVista. Prior to joining the firm in 2018, he spent over ten years in public markets investing at both Highfields Capital and Citadel Investment Group, developing deep expertise in hedged equity and long/short strategies.</div></div>
+        <div class="partner-info">
+          <div class="role">Partner &amp; Co-Head of Public Markets</div>
+          <h3>Niels Peetz-Larsen</h3>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="photo-avatar"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Adam-P_9989.jpg" alt="Adam Posner" loading="lazy"><div class="bio-overlay">Adam co-leads public markets at HighVista. Prior to joining the firm in 2016, he focused on public markets and absolute return strategies at Harvard Management Company, bringing institutional-caliber analytical rigor to HighVista's differentiated public equity platform.</div></div>
+        <div class="partner-info">
+          <div class="role">Partner &amp; Co-Head of Public Markets</div>
+          <h3>Adam Posner</h3>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="photo-avatar"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Nick-P_9896.jpg" alt="Nick Boston" loading="lazy"><div class="bio-overlay">Nick oversees all regulatory compliance, legal matters, and the implementation of HighVista's compliance program across all registered investment advisory activities. He was appointed Partner in 2024 in recognition of his central role in the firm's governance and risk framework.</div></div>
+        <div class="partner-info">
+          <div class="role">Partner, Chief Compliance Officer &amp; Counsel</div>
+          <h3>Nick Boston</h3>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="photo-avatar"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Caroline_0179.jpg" alt="Caroline Page" loading="lazy"><div class="bio-overlay">Caroline heads Relationship Management at HighVista Strategies and is a Partner of the firm. She leads the firm's client service and new business development efforts, working closely with endowments, foundations, pension funds, and family offices.</div></div>
+        <div class="partner-info">
+          <div class="role">Partner &amp; Head of Relationship Management</div>
+          <h3>Caroline Page</h3>
+        </div>
+      </div>
+
+      <div class="partner-card">
+        <div class="photo-avatar"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Ronald_0118.jpg" alt="Ron Landen" loading="lazy"><div class="bio-overlay">Ron serves as General Counsel, Chief Administrative Officer, and Interim Chief Financial Officer of HighVista Strategies. He oversees legal, compliance, finance, and operations, and plays a central role in the firm's governance and institutional framework.</div></div>
+        <div class="partner-info">
+          <div class="role">General Counsel, CAO &amp; Interim CFO</div>
+          <h3>Ron Landen</h3>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── TEAM SELECTOR ── -->
+  <section id="teams">
+    <div class="section-eyebrow">Investment Teams</div>
+    <h2 class="section-title">Explore by Team</h2>
+    <p class="section-lead">Select a team below to meet the partners leading each of HighVista's core investment strategies.</p>
+
+    <div class="team-boxes">
+      <div class="team-box" onclick="showTeam('venture')" id="btn-venture">
+        <div class="team-box-count">2 Partners</div>
+        <h4>Venture Team</h4>
+        <div class="team-box-label">Early-Stage &amp; Fund Investing</div>
+      </div>
+      <div class="team-box" onclick="showTeam('pe')" id="btn-pe">
+        <div class="team-box-count">2 Partners</div>
+        <h4>Private Equity Team</h4>
+        <div class="team-box-label">Lower Middle Market Buyouts</div>
+      </div>
+      <div class="team-box" onclick="showTeam('credit')" id="btn-credit">
+        <div class="team-box-count">2 Partners</div>
+        <h4>Private Credit Team</h4>
+        <div class="team-box-label">Opportunistic &amp; Specialty Lending</div>
+      </div>
+      <div class="team-box" onclick="showTeam('public')" id="btn-public">
+        <div class="team-box-count">2 Partners</div>
+        <h4>Public Markets Team</h4>
+        <div class="team-box-label">Biotech &amp; Hedged Strategies</div>
+      </div>
+      <div class="team-box" onclick="showTeam('firmwide')" id="btn-firmwide">
+        <div class="team-box-count">5 Partners</div>
+        <h4>Firmwide</h4>
+        <div class="team-box-label">Leadership, Finance &amp; Operations</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VENTURE PANEL ── -->
+  <div class="team-panel" id="panel-venture">
+    <div class="team-panel-header">
+      <h3>Venture Capital Team</h3>
+      <p>HighVista's venture capital team joined the firm in 2023 as part of the acquisition of the abrdn U.S. private markets business, bringing a strong track record in early-stage fund investing across AI, enterprise software, life sciences, fintech, and blockchain.</p>
+    </div>
+    <div class="members-grid">
+      <div class="member-card">
+        <div class="photo-avatar photo-avatar--lg"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Kirsten-Morin.jpg" alt="Kirsten Morin" loading="lazy"></div>
+        <div class="member-info">
+          <div class="role">Partner &amp; Co-Head of Venture Capital</div>
+          <h4>Kirsten Morin</h4>
+          <p>Kirsten co-leads HighVista's venture capital strategy with a focus on fund selection and portfolio construction across AI, life sciences, fintech, and enterprise software. She joined HighVista in 2023 as part of the abrdn U.S. private markets acquisition.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PRIVATE EQUITY PANEL ── -->
+  <div class="team-panel" id="panel-pe">
+    <div class="team-panel-header">
+      <h3>Private Equity Team</h3>
+      <p>HighVista's private equity team focuses on lower middle market buyouts in the United States — targeting founder-owned and family businesses where operational improvements and strategic repositioning can drive significant and durable value creation over a multi-year hold period.</p>
+    </div>
+    <div class="members-grid">
+      <div class="member-card">
+        <div class="photo-avatar photo-avatar--lg"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Dickie_John.jpg" alt="John Dickie" loading="lazy"></div>
+        <div class="member-info">
+          <div class="role">Partner &amp; Co-Head of Private Equity</div>
+          <h4>John Dickie</h4>
+          <p>John co-leads HighVista's lower middle market private equity platform, overseeing the firm's flagship buyout fund series. He brings extensive experience sourcing, underwriting, and managing control investments in small, privately held U.S. companies.</p>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="photo-avatar photo-avatar--lg"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/12/Scott_2769.jpg" alt="Scott Reed" loading="lazy"></div>
+        <div class="member-info">
+          <div class="role">Partner &amp; Co-Head of Private Equity</div>
+          <h4>Scott Reed</h4>
+          <p>Scott co-leads HighVista's private equity strategy. He joined the firm in 2023 as part of the acquisition of the abrdn U.S. private markets business, bringing deep lower middle market deal expertise and a strong track record across the firm's buyout platform.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PRIVATE CREDIT PANEL ── -->
+  <div class="team-panel" id="panel-credit">
+    <div class="team-panel-header">
+      <h3>Private Credit Team</h3>
+      <p>HighVista's private credit team pursues opportunistic lending strategies across the credit spectrum — with a focus on specialty finance, asset-backed lending, and complex credit structures that are underserved by traditional institutional capital providers.</p>
+    </div>
+    <div class="members-grid">
+      <div class="member-card">
+        <div class="photo-avatar photo-avatar--lg"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Luke-C_0295.jpg" alt="Luke Chan" loading="lazy"></div>
+        <div class="member-info">
+          <div class="role">Partner &amp; Co-Head of Private Credit</div>
+          <h4>Luke Chan</h4>
+          <p>Luke leads HighVista's private credit platform and its investing across specialty private credit and opportunistic credit verticals. He also plays a central role in the firm's strategic capital activities and sits on the Private Credit Investment Committee.</p>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="photo-avatar photo-avatar--lg"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Ben-R_1097.jpg" alt="Ben Radinsky" loading="lazy"></div>
+        <div class="member-info">
+          <div class="role">Partner &amp; Co-Head of Private Credit</div>
+          <h4>Ben Radinsky</h4>
+          <p>Ben co-leads HighVista's private credit strategy and is a member of the Private Credit Investment Committee. He joined the firm in 2021 and brings over 20 years of relevant experience across specialty lending, structured credit, and opportunistic credit markets.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PUBLIC MARKETS PANEL ── -->
+  <div class="team-panel" id="panel-public">
+    <div class="team-panel-header">
+      <h3>Public Markets Team</h3>
+      <p>HighVista's public markets team combines deep domain expertise with rigorous financial analysis to identify asymmetric opportunities in biotechnology equities and hedged public market strategies — areas where specialized knowledge creates a durable, repeatable informational advantage.</p>
+    </div>
+    <div class="members-grid">
+      <div class="member-card">
+        <div class="photo-avatar photo-avatar--lg"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Neils_9547.jpg" alt="Niels Peetz-Larsen" loading="lazy"></div>
+        <div class="member-info">
+          <div class="role">Partner &amp; Co-Head of Public Markets</div>
+          <h4>Niels Peetz-Larsen</h4>
+          <p>Niels co-leads public markets at HighVista. Prior to joining the firm in 2018, he spent over ten years in public markets investing at both Highfields Capital and Citadel Investment Group, developing deep expertise in hedged equity and long/short strategies.</p>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="photo-avatar photo-avatar--lg"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Adam-P_9989.jpg" alt="Adam Posner" loading="lazy"></div>
+        <div class="member-info">
+          <div class="role">Partner &amp; Co-Head of Public Markets</div>
+          <h4>Adam Posner</h4>
+          <p>Adam co-leads public markets at HighVista. Prior to joining the firm in 2016, he focused on public markets and absolute return strategies at Harvard Management Company, bringing institutional-caliber analytical rigor to HighVista's differentiated public equity platform.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FIRMWIDE PANEL ── -->
+  <div class="team-panel" id="panel-firmwide">
+    <div class="team-panel-header">
+      <h3>Firmwide Leadership</h3>
+      <p>HighVista's firmwide partners lead the investment and operational direction of the firm, ensuring that HighVista's investment philosophy, client relationships, financial integrity, and compliance framework operate with the same standard of excellence applied across all strategies.</p>
+    </div>
+    <div class="members-grid">
+      <div class="member-card">
+        <div class="photo-avatar photo-avatar--lg"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Andre-P_1083.jpg" alt="André Perold" loading="lazy"></div>
+        <div class="member-info">
+          <div class="role">Co-Founder &amp; Chief Investment Officer</div>
+          <h4>André F. Perold</h4>
+          <p>André is a Co-Founder and CIO of HighVista Strategies. He is also the George Gund Professor of Finance and Banking, Emeritus, at Harvard Business School, where he spent over three decades and served as Senior Associate Dean and Chair of the Finance Faculty.</p>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="photo-avatar photo-avatar--lg"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Raphael_9610.jpg" alt="Raphi Schorr" loading="lazy"></div>
+        <div class="member-info">
+          <div class="role">Partner &amp; Deputy Chief Investment Officer</div>
+          <h4>Raphi Schorr</h4>
+          <p>Raphi joined HighVista shortly after the firm's founding and has been central to its investment team throughout its evolution. As Deputy CIO, he plays a leading role in portfolio construction, cross-strategy risk oversight, and management of the multi-asset alternatives strategy.</p>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="photo-avatar photo-avatar--lg"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Nick-P_9896.jpg" alt="Nick Boston" loading="lazy"></div>
+        <div class="member-info">
+          <div class="role">Partner, Chief Compliance Officer &amp; Counsel</div>
+          <h4>Nick Boston</h4>
+          <p>Nick oversees all regulatory compliance, legal matters, and the implementation of HighVista's compliance program across all registered investment advisory activities. He was appointed Partner in 2024 in recognition of his central role in the firm's governance and risk framework.</p>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="photo-avatar photo-avatar--lg"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Caroline_0179.jpg" alt="Caroline Page" loading="lazy"></div>
+        <div class="member-info">
+          <div class="role">Partner &amp; Head of Relationship Management</div>
+          <h4>Caroline Page</h4>
+          <p>Caroline heads Relationship Management at HighVista Strategies and is a Partner of the firm. She leads the firm's client service and new business development efforts, working closely with endowments, foundations, pension funds, and family offices.</p>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="photo-avatar photo-avatar--lg"><img src="https://www.highvistastrategies.com/wp-content/uploads/2023/09/Ronald_0118.jpg" alt="Ron Landen" loading="lazy"></div>
+        <div class="member-info">
+          <div class="role">General Counsel, CAO &amp; Interim CFO</div>
+          <h4>Ron Landen</h4>
+          <p>Ron serves as General Counsel, Chief Administrative Officer, and Interim Chief Financial Officer of HighVista Strategies. He oversees legal, compliance, finance, and operations, and plays a central role in the firm's governance and institutional framework.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="cta-banner">
+    <h2>Interested in working with<br>the HighVista team?</h2>
+    <a href="mailto:info@highvistastrategies.com" class="btn-primary">Get in Touch
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a>
+        <p>An employee-owned alternative asset manager helping sophisticated investors achieve enduring alpha in structurally inefficient markets.</p>
+      </div>
+      <div class="footer-links-group"><h5>Strategies</h5><ul>
+        <li><a href="multi-asset.html">Multi-Asset Alternatives</a></li>
+        <li><a href="private-credit.html">Private Credit</a></li>
+        <li><a href="private-equity.html">Private Equity</a></li>
+        <li><a href="venture-capital.html">Venture Capital</a></li>
+        <li><a href="public-markets.html">Public Markets</a></li>
+      </ul></div>
+      <div class="footer-links-group"><h5>Company</h5><ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="clients.html">Clients</a></li>
+      </ul></div>
+      <div class="footer-links-group"><h5>Contact</h5><ul>
+        <li><a href="#">Boston, Massachusetts</a></li>
+        <li><a href="mailto:info@highvistastrategies.com">info@highvistastrategies.com</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 HighVista Strategies LLC. All rights reserved.</p>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">ADV Brochure</a></div>
+    </div>
+  </footer>
+  <div class="disclosure"><p>HighVista Strategies LLC is an investment adviser registered with the U.S. Securities and Exchange Commission. Registration does not imply a certain level of skill or training. Past performance is not indicative of future results. This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities.</p></div>
+
+  <script>
+    function showTeam(id) {
+      var wasOpen = document.getElementById('btn-' + id).classList.contains('active');
+      document.querySelectorAll('.team-panel').forEach(function(p) { p.classList.remove('active'); });
+      document.querySelectorAll('.team-box').forEach(function(b) { b.classList.remove('active'); delete b.dataset.open; });
+      if (!wasOpen) {
+        document.getElementById('panel-' + id).classList.add('active');
+        document.getElementById('btn-' + id).classList.add('active');
+        setTimeout(function() {
+          document.getElementById('panel-' + id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      }
+    }
+  </script>
+
+  <script>
+    (function() {
+      var page = window.location.pathname.split('/').pop() || 'highvista_redesign.html';
+      document.querySelectorAll('.nav-links a').forEach(function(a) {
+        var href = (a.getAttribute('href') || '').split('#')[0];
+        if (href && href === page) { a.classList.add('nav-active'); }
+      });
+    })();
+  </script>
+</body>
+</html>

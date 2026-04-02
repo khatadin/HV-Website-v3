@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Private Credit – HighVista Strategies</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy:#0d1f3c;--navy-mid:#162d52;--accent:#0a8fa3;--accent-lt:#1aaec4;--cream:#f7f4ef;--light:#ffffff;--text:#1a1a2e;--muted:#6b7280;--border:#e2ddd6; }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--light);line-height:1.7;font-size:16px;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:100px;background:rgba(13,31,60,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(10,143,163,0.2);}
+    .nav-logo{font-family:'EB Garamond',serif;font-size:1.35rem;font-weight:500;color:var(--light);letter-spacing:0.02em;text-decoration:none;}
+    .nav-logo span{color:var(--accent-lt);}
+    .nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+    .nav-links a{color:rgba(255,255,255,0.78);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--accent-lt);}
+    .nav-dropdown{position:relative;}
+    .nav-dropdown>a::after{content:' ▾';font-size:0.65rem;}
+    .nav-dropdown-menu{position:absolute;top:calc(100% + 12px);left:0;background:var(--navy);min-width:240px;padding:8px 0;opacity:0;visibility:hidden;transition:opacity 0.2s,visibility 0.2s;border-top:2px solid var(--accent);box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+    .nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;}
+    .nav-dropdown-menu a{display:block;padding:10px 20px;font-size:0.8rem;color:rgba(255,255,255,0.65);letter-spacing:0.05em;transition:background 0.15s,color 0.15s;text-transform:none;}
+    .nav-dropdown-menu a:hover{background:rgba(255,255,255,0.05);color:var(--accent-lt);}
+    .nav-dropdown-menu .sub-label{display:block;padding:10px 20px 4px;font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:0.12em;text-transform:uppercase;}
+    .nav-cta{background:transparent!important;border:1px solid var(--accent);color:var(--accent)!important;padding:8px 20px;border-radius:2px;}
+    .nav-cta:hover{background:var(--accent)!important;color:var(--light)!important;}
+    .page-hero{padding:164px 60px 80px;min-height:440px;background:var(--navy);position:relative;overflow:hidden;}
+    .page-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(10,143,163,0.08) 0%,transparent 70%);}
+    .breadcrumb{position:relative;z-index:1;display:flex;align-items:center;gap:8px;margin-bottom:24px;}
+    .breadcrumb a,.breadcrumb span{font-size:0.75rem;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;}
+    .breadcrumb a:hover{color:var(--accent-lt);}
+    .breadcrumb-sep{color:rgba(255,255,255,0.2);font-size:0.65rem;}
+    .page-eyebrow{position:relative;z-index:1;display:inline-flex;align-items:center;gap:12px;color:var(--accent-lt);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;}
+    .page-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
+    .page-hero h1{position:relative;z-index:1;font-family:'EB Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:400;color:var(--light);line-height:1.2;margin-bottom:20px;}
+    .page-hero p{position:relative;z-index:1;color:rgba(255,255,255,0.6);font-size:1.05rem;font-weight:300;max-width:580px;line-height:1.8;}
+    section{padding:90px 60px;}
+    .section-eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--accent);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px;}
+    .section-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
+    .section-title{font-family:'EB Garamond',serif;font-size:clamp(1.9rem,3vw,2.6rem);font-weight:400;color:var(--navy);line-height:1.2;margin-bottom:20px;}
+    .section-lead{color:var(--muted);font-size:1rem;font-weight:300;max-width:620px;line-height:1.8;}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:56px;}
+    .body-text p{color:#444;font-size:1rem;line-height:1.85;margin-bottom:20px;}
+    .pillar-list{display:flex;flex-direction:column;gap:0;}
+    .pillar-item{padding:24px 0;border-bottom:1px solid var(--border);}
+    .pillar-item:first-child{border-top:1px solid var(--border);}
+    .pillar-item h4{font-size:0.9rem;font-weight:600;color:var(--navy);margin-bottom:8px;}
+    .pillar-item p{font-size:0.875rem;color:var(--muted);line-height:1.7;}
+    .pillar-badge{display:inline-block;font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;border-radius:1px;margin-bottom:12px;}
+    #segments{background:var(--cream);}
+    .seg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border:1px solid var(--border);margin-top:56px;}
+    .seg-card{background:var(--light);padding:36px 28px;transition:background 0.2s;}
+    .seg-card:hover{background:var(--cream);}
+    .seg-card h4{font-family:'EB Garamond',serif;font-size:1.15rem;color:var(--navy);margin-bottom:12px;}
+    .seg-card p{font-size:0.875rem;color:var(--muted);line-height:1.75;}
+    .seg-icon{width:36px;height:36px;border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:20px;border-radius:2px;}
+    #track{background:var(--navy);}
+    #track .section-title{color:var(--light);}
+    #track .section-lead{color:rgba(255,255,255,0.55);}
+    .fund-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);margin-top:56px;}
+    .fund-box{background:var(--navy);padding:36px 28px;}
+    .fund-box .fund-name{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-lt);margin-bottom:16px;}
+    .fund-box h4{font-family:'EB Garamond',serif;font-size:1.1rem;color:var(--light);margin-bottom:10px;}
+    .fund-box p{font-size:0.875rem;color:rgba(255,255,255,0.5);line-height:1.7;}
+    .cta-banner{background:var(--navy-mid);padding:80px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;border-top:1px solid rgba(10,143,163,0.2);border-bottom:1px solid rgba(10,143,163,0.2);}
+    .cta-banner h2{font-family:'EB Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--light);font-weight:400;max-width:560px;}
+    .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--light);padding:14px 32px;font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.15s;}
+    .btn-primary:hover{background:var(--accent-lt);transform:translateY(-1px);}
+    footer{background:var(--navy);padding:60px 60px 40px;border-top:1px solid rgba(255,255,255,0.06);}
+    .footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:60px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);}
+    .footer-brand .nav-logo{display:block;margin-bottom:16px;font-size:1.2rem;}
+    .footer-brand p{color:rgba(255,255,255,0.4);font-size:0.85rem;line-height:1.7;max-width:280px;}
+    .footer-links-group h5{color:var(--accent-lt);font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:18px;}
+    .footer-links-group ul{list-style:none;}
+    .footer-links-group li{margin-bottom:10px;}
+    .footer-links-group a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.875rem;transition:color 0.2s;}
+    .footer-links-group a:hover{color:var(--accent-lt);}
+    .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;}
+    .footer-bottom p{color:rgba(255,255,255,0.28);font-size:0.78rem;}
+    .footer-legal{display:flex;gap:24px;}
+    .footer-legal a{color:rgba(255,255,255,0.28);font-size:0.78rem;text-decoration:none;}
+    .footer-legal a:hover{color:rgba(255,255,255,0.6);}
+    .disclosure{background:#f0ede8;padding:28px 60px;border-top:1px solid var(--border);}
+    .disclosure p{font-size:0.72rem;color:#999;line-height:1.6;}
+    @media(max-width:900px){nav{padding:0 24px;}.nav-links{display:none;}section,.page-hero,.cta-banner{padding-left:24px;padding-right:24px;}.two-col{grid-template-columns:1fr;gap:40px;}.seg-grid,.fund-row{grid-template-columns:1fr;}.footer-top{flex-direction:column;gap:36px;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}.cta-banner{flex-direction:column;text-align:center;}.disclosure{padding:24px;}}
+  .hero-mountain{position:absolute;right:0;top:0;height:100%;width:58%;pointer-events:none;object-fit:cover;object-position:left top;-webkit-mask-image:linear-gradient(to right,transparent 0%,black 18%);mask-image:linear-gradient(to right,transparent 0%,black 18%);opacity:0.9;}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a>
+    <ul class="nav-links">
+            <li class="nav-dropdown">
+        <a href="about.html">About</a>
+        <div class="nav-dropdown-menu">
+          <a href="about.html#firm-edge">Firm Edge</a>
+          <a href="about.html#culture">Culture</a>
+          <a href="about.html#milestones">History</a>
+          <a href="team.html">Our Team</a>
+          <a href="about.html#responsibility">Responsibility</a>
+        </div>
+      </li>
+      <li class="nav-dropdown"><a href="#">Strategies</a>
+        <div class="nav-dropdown-menu">
+          <span class="sub-label">All Strategies</span><a href="multi-asset.html">Multi-Asset Alternatives</a>
+          <span class="sub-label">Private Markets</span><a href="private-credit.html">Private Credit</a><a href="private-equity.html">Lower Middle Market PE</a><a href="venture-capital.html">Early-Stage Venture Capital</a>
+          <span class="sub-label">Public Markets</span><a href="public-markets.html">Differentiated Public Markets</a>
+        </div>
+      </li>
+      <li><a href="team.html">Our Team</a></li>
+      <li><a href="clients.html">Clients</a></li>
+      <li><a href="news.html">News &amp; Insights</a></li>
+      <li><a href="mailto:info@highvistastrategies.com" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=85&fit=crop" class="hero-mountain" alt="">
+    <div class="breadcrumb"><a href="highvista_redesign.html">Home</a><span class="breadcrumb-sep">›</span><span>Private Markets</span><span class="breadcrumb-sep">›</span><span>Private Credit</span></div>
+    <div class="page-eyebrow">Private Markets</div>
+    <h1>Private Credit</h1>
+    <p>HighVista's private credit strategy targets specialized lending and opportunistic credit opportunities in undercapitalized markets — generating equity-like returns through disciplined underwriting and structural expertise.</p>
+  </div>
+
+  <section id="overview">
+    <div class="section-eyebrow">Strategy Overview</div>
+    <h2 class="section-title">Beyond Traditional<br>Direct Lending</h2>
+    <div class="two-col">
+      <div class="body-text">
+        <p>HighVista's private credit strategy is built on a simple but powerful observation: the most attractive risk-adjusted returns in credit markets are found not in the crowded direct lending market, but in more specialized, off-the-run segments that are structurally undercapitalized and harder to access.</p>
+        <p>Our approach focuses on opportunistic credit opportunities — those that require more work to source, greater expertise to underwrite, and deeper relationships to access. These segments are systematically underserved by traditional credit providers, creating a persistent premium for patient, skilled capital.</p>
+        <p>The strategy takes a multi-strategy approach, investing across real estate-backed credits, corporate credits, and uncorrelated credit opportunities. Each investment must offer compelling risk-adjusted returns that cannot be replicated through traditional direct lending.</p>
+      </div>
+      <div>
+        <div class="pillar-list">
+          <div class="pillar-item"><div class="pillar-badge">Core Principle</div><h4>Outperform Traditional Direct Lending</h4><p>By avoiding crowded direct lending and focusing on more specialized, esoteric credit, we seek higher risk-adjusted returns than the traditional private credit market can offer.</p></div>
+          <div class="pillar-item"><div class="pillar-badge">Approach</div><h4>Opportunistic &amp; Flexible</h4><p>Our credit portfolio spans special situations, secondaries, junior capital, esoteric assets, and other segments that offer equity-like return profiles within a credit structure.</p></div>
+          <div class="pillar-item"><div class="pillar-badge">Edge</div><h4>Proprietary Sourcing &amp; Underwriting</h4><p>Success in off-the-run credit requires proprietary deal sourcing, sophisticated structuring, and the ability to underwrite transactions that generalist lenders cannot or will not.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="segments">
+    <div class="section-eyebrow">Investment Segments</div>
+    <h2 class="section-title">A Multi-Strategy<br>Credit Approach</h2>
+    <p class="section-lead">HighVista's private credit strategy invests across three core segments, each chosen for its structural inefficiency and return premium over traditional lending.</p>
+    <div class="seg-grid">
+      <div class="seg-card">
+        <div class="seg-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h4>Real Estate-Backed Credits</h4>
+        <p>Loans and credit facilities secured by real estate assets — including transitional properties, special situations, and complex collateral structures — that fall outside the appetite of traditional real estate lenders.</p>
+      </div>
+      <div class="seg-card">
+        <div class="seg-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+        <h4>Corporate Credits</h4>
+        <p>Specialized corporate lending including special situations, rescue financing, complex capital structures, and junior debt in the lower middle market — segments where HighVista's private equity expertise creates a meaningful underwriting edge.</p>
+      </div>
+      <div class="seg-card">
+        <div class="seg-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h4>Uncorrelated Credit Opportunities</h4>
+        <p>Esoteric credit assets — structured products, royalty streams, litigation finance, and other specialized instruments — that offer attractive returns with low correlation to traditional financial markets.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="track">
+    <div class="section-eyebrow">Track Record</div>
+    <h2 class="section-title">A Growing Private<br>Credit Franchise</h2>
+    <p class="section-lead">HighVista has built a consistent track record in private credit through multiple fund cycles, with strong investor demand reflected in oversubscribed closings.</p>
+    <div class="fund-row">
+      <div class="fund-box"><div class="fund-name">Fund I</div><h4>Opportunistic Private Credit I</h4><p>HighVista's inaugural private credit fund established the strategy's investment approach and demonstrated the firm's ability to source and underwrite specialized credit opportunities across multiple market environments.</p></div>
+      <div class="fund-box"><div class="fund-name">Fund II — $450M</div><h4>Opportunistic Private Credit II</h4><p>Closed in 2022 at $450 million, Fund II expanded the strategy's reach across real estate-backed credits, corporate credits, and uncorrelated credit opportunities — investing in pockets of dislocation beyond the traditional direct lending market.</p></div>
+      <div class="fund-box"><div class="fund-name">Fund III — Active</div><h4>Private Credit Fund III</h4><p>HighVista's third private credit fund continues the strategy's evolution, leveraging the expanded capabilities brought by the 2023 abrdn acquisition and targeting the same structurally attractive, undercapitalized credit segments.</p></div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Interested in HighVista's<br>private credit strategy?</h2>
+    <a href="mailto:info@highvistastrategies.com" class="btn-primary">Contact Us <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a><p>An employee-owned alternative asset manager helping sophisticated investors achieve enduring alpha in structurally inefficient markets.</p></div>
+      <div class="footer-links-group"><h5>Strategies</h5><ul><li><a href="multi-asset.html">Multi-Asset Alternatives</a></li><li><a href="private-credit.html">Private Credit</a></li><li><a href="private-equity.html">Private Equity</a></li><li><a href="venture-capital.html">Venture Capital</a></li><li><a href="public-markets.html">Public Markets</a></li></ul></div>
+      <div class="footer-links-group"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="clients.html">Clients</a></li></ul></div>
+      <div class="footer-links-group"><h5>Contact</h5><ul><li><a href="#">Boston, Massachusetts</a></li><li><a href="mailto:info@highvistastrategies.com">info@highvistastrategies.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 HighVista Strategies LLC. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">ADV Brochure</a></div></div>
+  </footer>
+  <div class="disclosure"><p>HighVista Strategies LLC is an investment adviser registered with the U.S. Securities and Exchange Commission. Registration does not imply a certain level of skill or training. Past performance is not indicative of future results. This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. Investing involves risk, including the possible loss of principal.</p></div>
+  <script>
+    (function() {
+      var page = window.location.pathname.split('/').pop() || 'highvista_redesign.html';
+      document.querySelectorAll('.nav-links a').forEach(function(a) {
+        var href = (a.getAttribute('href') || '').split('#')[0];
+        if (href && href === page) { a.classList.add('nav-active'); }
+      });
+    })();
+  </script>
+</body>
+</html>

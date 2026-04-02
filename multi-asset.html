@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi-Asset Alternatives – HighVista Strategies</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy:#0d1f3c;--navy-mid:#162d52;--accent:#0a8fa3;--accent-lt:#1aaec4;--cream:#f7f4ef;--light:#ffffff;--text:#1a1a2e;--muted:#6b7280;--border:#e2ddd6; }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--light);line-height:1.7;font-size:16px;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:100px;background:rgba(13,31,60,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(10,143,163,0.2);}
+    .nav-logo{font-family:'EB Garamond',serif;font-size:1.35rem;font-weight:500;color:var(--light);letter-spacing:0.02em;text-decoration:none;}
+    .nav-logo span{color:var(--accent-lt);}
+    .nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+    .nav-links a{color:rgba(255,255,255,0.78);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--accent-lt);}
+    .nav-dropdown{position:relative;}
+    .nav-dropdown>a::after{content:' ▾';font-size:0.65rem;}
+    .nav-dropdown-menu{position:absolute;top:calc(100% + 12px);left:0;background:var(--navy);min-width:240px;padding:8px 0;opacity:0;visibility:hidden;transition:opacity 0.2s,visibility 0.2s;border-top:2px solid var(--accent);box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+    .nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;}
+    .nav-dropdown-menu a{display:block;padding:10px 20px;font-size:0.8rem;color:rgba(255,255,255,0.65);letter-spacing:0.05em;transition:background 0.15s,color 0.15s;text-transform:none;}
+    .nav-dropdown-menu a:hover{background:rgba(255,255,255,0.05);color:var(--accent-lt);}
+    .nav-dropdown-menu .sub-label{display:block;padding:10px 20px 4px;font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:0.12em;text-transform:uppercase;}
+    .nav-cta{background:transparent!important;border:1px solid var(--accent);color:var(--accent)!important;padding:8px 20px;border-radius:2px;transition:background 0.2s,color 0.2s!important;}
+    .nav-cta:hover{background:var(--accent)!important;color:var(--light)!important;}
+    .page-hero{padding:164px 60px 80px;min-height:440px;background:var(--navy);position:relative;overflow:hidden;}
+    .page-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(10,143,163,0.08) 0%,transparent 70%);}
+    .breadcrumb{position:relative;z-index:1;display:flex;align-items:center;gap:8px;margin-bottom:24px;}
+    .breadcrumb a,.breadcrumb span{font-size:0.75rem;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;}
+    .breadcrumb a:hover{color:var(--accent-lt);}
+    .breadcrumb-sep{color:rgba(255,255,255,0.2);font-size:0.65rem;}
+    .page-eyebrow{position:relative;z-index:1;display:inline-flex;align-items:center;gap:12px;color:var(--accent-lt);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;}
+    .page-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
+    .page-hero h1{position:relative;z-index:1;font-family:'EB Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:400;color:var(--light);line-height:1.2;margin-bottom:20px;}
+    .page-hero p{position:relative;z-index:1;color:rgba(255,255,255,0.6);font-size:1.05rem;font-weight:300;max-width:580px;line-height:1.8;}
+    section{padding:90px 60px;}
+    .section-eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--accent);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px;}
+    .section-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
+    .section-title{font-family:'EB Garamond',serif;font-size:clamp(1.9rem,3vw,2.6rem);font-weight:400;color:var(--navy);line-height:1.2;margin-bottom:20px;}
+    .section-lead{color:var(--muted);font-size:1rem;font-weight:300;max-width:620px;line-height:1.8;}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:56px;}
+    .body-text p{color:#444;font-size:1rem;line-height:1.85;margin-bottom:20px;}
+    .feature-list{display:flex;flex-direction:column;gap:0;}
+    .feature-item{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border);}
+    .feature-item:first-child{border-top:1px solid var(--border);}
+    .feature-num{font-family:'EB Garamond',serif;font-size:1.4rem;color:var(--accent);opacity:0.7;min-width:32px;line-height:1;padding-top:2px;}
+    .feature-item h4{font-size:0.9rem;font-weight:600;color:var(--navy);margin-bottom:8px;}
+    .feature-item p{font-size:0.875rem;color:var(--muted);line-height:1.7;}
+    /* INVESTMENT PHILOSOPHY */
+    #philosophy{background:var(--light);}
+    .phil-subsection{margin-top:52px;}
+    .phil-subtitle{font-size:0.92rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#2a6f8f;margin-bottom:24px;display:block;text-align:center;}
+    .phil-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border:1px solid var(--border);}
+    .phil-card{background:var(--light);padding:36px 32px;transition:background 0.2s;}
+    .phil-card:hover{background:rgba(10,143,163,0.07);}
+    .phil-card h4{font-family:'EB Garamond',serif;font-size:1.15rem;color:var(--navy);margin-bottom:12px;font-weight:500;line-height:1.3;}
+    .phil-card p{font-size:0.875rem;color:var(--muted);line-height:1.75;}
+    .phil-divider{display:flex;align-items:center;justify-content:center;padding:44px 0;}
+    .phil-divider-icon{width:42px;height:42px;border:1.5px solid #2a6f8f;display:flex;align-items:center;justify-content:center;color:#2a6f8f;border-radius:2px;}
+    #resilience{background:var(--cream);}
+    .stress-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border:1px solid var(--border);margin-top:56px;}
+    .stress-card{background:var(--light);padding:36px 28px;}
+    .stress-card h4{font-family:'EB Garamond',serif;font-size:1.15rem;color:var(--navy);margin-bottom:12px;}
+    .stress-card p{font-size:0.875rem;color:var(--muted);line-height:1.75;}
+    .stress-badge{display:inline-block;font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;border-radius:1px;margin-bottom:16px;}
+    #dark{background:var(--navy);}
+    #dark .section-title{color:var(--light);}
+    #dark .section-lead{color:rgba(255,255,255,0.55);}
+    .access-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);margin-top:56px;}
+    .access-box{background:var(--navy);padding:40px 32px;}
+    .access-box h4{font-family:'EB Garamond',serif;font-size:1.2rem;color:var(--light);margin-bottom:12px;}
+    .access-box p{font-size:0.875rem;color:rgba(255,255,255,0.55);line-height:1.75;}
+    .access-icon{width:36px;height:36px;border:1px solid rgba(10,143,163,0.5);display:flex;align-items:center;justify-content:center;color:var(--accent-lt);margin-bottom:20px;border-radius:2px;}
+    .cta-banner{background:var(--navy-mid);padding:80px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;border-top:1px solid rgba(10,143,163,0.2);border-bottom:1px solid rgba(10,143,163,0.2);}
+    .cta-banner h2{font-family:'EB Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--light);font-weight:400;max-width:560px;}
+    .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--light);padding:14px 32px;font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.15s;}
+    .btn-primary:hover{background:var(--accent-lt);transform:translateY(-1px);}
+    footer{background:var(--navy);padding:60px 60px 40px;border-top:1px solid rgba(255,255,255,0.06);}
+    .footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:60px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);}
+    .footer-brand .nav-logo{display:block;margin-bottom:16px;font-size:1.2rem;}
+    .footer-brand p{color:rgba(255,255,255,0.4);font-size:0.85rem;line-height:1.7;max-width:280px;}
+    .footer-links-group h5{color:var(--accent-lt);font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:18px;}
+    .footer-links-group ul{list-style:none;}
+    .footer-links-group li{margin-bottom:10px;}
+    .footer-links-group a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.875rem;transition:color 0.2s;}
+    .footer-links-group a:hover{color:var(--accent-lt);}
+    .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;}
+    .footer-bottom p{color:rgba(255,255,255,0.28);font-size:0.78rem;}
+    .footer-legal{display:flex;gap:24px;}
+    .footer-legal a{color:rgba(255,255,255,0.28);font-size:0.78rem;text-decoration:none;transition:color 0.2s;}
+    .footer-legal a:hover{color:rgba(255,255,255,0.6);}
+    .disclosure{background:#f0ede8;padding:28px 60px;border-top:1px solid var(--border);}
+    .disclosure p{font-size:0.72rem;color:#999;line-height:1.6;}
+    @media(max-width:900px){nav{padding:0 24px;}.nav-links{display:none;}section,.page-hero,.cta-banner{padding-left:24px;padding-right:24px;}.two-col{grid-template-columns:1fr;gap:40px;}.phil-grid{grid-template-columns:1fr;}.stress-grid{grid-template-columns:1fr;}.access-grid{grid-template-columns:1fr;}.footer-top{flex-direction:column;gap:36px;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}.cta-banner{flex-direction:column;text-align:center;}.disclosure{padding:24px;}}
+  .hero-mountain{position:absolute;right:0;top:0;height:100%;width:58%;pointer-events:none;object-fit:cover;object-position:left top;-webkit-mask-image:linear-gradient(to right,transparent 0%,black 18%);mask-image:linear-gradient(to right,transparent 0%,black 18%);opacity:0.9;}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a>
+    <ul class="nav-links">
+            <li class="nav-dropdown">
+        <a href="about.html">About</a>
+        <div class="nav-dropdown-menu">
+          <a href="about.html#firm-edge">Firm Edge</a>
+          <a href="about.html#culture">Culture</a>
+          <a href="about.html#milestones">History</a>
+          <a href="team.html">Our Team</a>
+          <a href="about.html#responsibility">Responsibility</a>
+        </div>
+      </li>
+      <li class="nav-dropdown"><a href="#">Strategies</a>
+        <div class="nav-dropdown-menu">
+          <span class="sub-label">All Strategies</span>
+          <a href="multi-asset.html">Multi-Asset Alternatives</a>
+          <span class="sub-label">Private Markets</span>
+          <a href="private-credit.html">Private Credit</a>
+          <a href="private-equity.html">Lower Middle Market PE</a>
+          <a href="venture-capital.html">Early-Stage Venture Capital</a>
+          <span class="sub-label">Public Markets</span>
+          <a href="public-markets.html">Differentiated Public Markets</a>
+        </div>
+      </li>
+      <li><a href="team.html">Our Team</a></li>
+      <li><a href="clients.html">Clients</a></li>
+      <li><a href="news.html">News &amp; Insights</a></li>
+      <li><a href="mailto:info@highvistastrategies.com" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=85&fit=crop" class="hero-mountain" alt="">
+    <div class="breadcrumb"><a href="highvista_redesign.html">Home</a><span class="breadcrumb-sep">›</span><span>Strategies</span><span class="breadcrumb-sep">›</span><span>Multi-Asset</span></div>
+    <div class="page-eyebrow">Strategy</div>
+    <h1>Multi-Asset<br>Alternatives</h1>
+    <p>HighVista's flagship strategy — a carefully diversified, risk-managed portfolio of alternative investments designed to serve as a reliable core for sophisticated investors seeking differentiated returns.</p>
+  </div>
+
+  <section id="overview">
+    <div class="section-eyebrow">Strategy Overview</div>
+    <h2 class="section-title">The Backbone of<br>HighVista's Platform</h2>
+    <div class="two-col">
+      <div class="body-text">
+        <p>HighVista began investing on behalf of clients in 2005 with a commingled multi-asset class, multi-alternatives offering. More than two decades later, this strategy remains the cornerstone of our investment platform — the fullest expression of our philosophy and capabilities in a single portfolio.</p>
+        <p>The Multi-Asset Alternative Strategy is designed to be an all-weather core investment that provides clients with broad exposure to HighVista's entire suite of private and public market capabilities. The portfolio is built to deliver strong risk-adjusted returns across market environments, with thoughtful diversification across asset classes, geographies, and return drivers.</p>
+        <p>Unlike a traditional fund-of-funds, HighVista manages this strategy with complete integration — there is no division between the managers of underlying strategies and the architects of the overall portfolio. The same investment team that makes individual strategy decisions also constructs and manages the multi-asset portfolio.</p>
+      </div>
+      <div>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-num">01</div>
+            <div>
+              <h4>Diversified Across the Full HighVista Platform</h4>
+              <p>Exposure to private equity, private credit, venture capital, biotechnology, and hedged public market strategies — all in a single, unified allocation.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-num">02</div>
+            <div>
+              <h4>Integrated Risk Management</h4>
+              <p>Portfolio-level risk management, disciplined exposure management, and active tail risk mitigation are embedded in every allocation decision.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-num">03</div>
+            <div>
+              <h4>Proven Across Market Cycles</h4>
+              <p>The strategy has navigated the Global Financial Crisis, COVID-19, and the 2022 rate shock — providing evidence of its resilience and all-weather design.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-num">04</div>
+            <div>
+              <h4>Ideal Core Alternative Allocation</h4>
+              <p>Designed to complement or replace a broad alternatives allocation within a larger institutional or family office portfolio.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PORTFOLIO COMPOSITION ── -->
+  <section id="composition" style="background:var(--cream);">
+    <div class="section-eyebrow">Portfolio Composition</div>
+    <h2 class="section-title">Portfolio Composition</h2>
+    <p class="section-lead">HighVista's Multi-Asset Alternative strategy is diversified equally across five distinct return streams, each targeting structurally inefficient markets with differentiated alpha sources.</p>
+
+    <div style="display:flex;align-items:center;gap:80px;margin-top:60px;flex-wrap:wrap;">
+
+      <!-- Donut chart -->
+      <div style="position:relative;flex-shrink:0;">
+        <svg id="pie-chart" viewBox="0 0 320 320" width="320" height="320" style="display:block;overflow:visible;">
+          <g id="pie-slices">
+            <!-- Hedges -->
+            <path class="pie-slice" data-label="Hedges" data-pct="20%"
+              d="M160.00,40.00 A120,120 0 0,1 274.13,122.92 L228.48,137.75 A72,72 0 0,0 160.00,88.00 Z"
+              fill="#0a8fa3" style="cursor:pointer;transition:transform 0.18s,opacity 0.18s;transform-origin:160px 160px;"/>
+            <!-- Private Equity -->
+            <path class="pie-slice" data-label="Private Equity" data-pct="20%"
+              d="M274.13,122.92 A120,120 0 0,1 230.53,257.08 L202.32,218.25 A72,72 0 0,0 228.48,137.75 Z"
+              fill="#162d52" style="cursor:pointer;transition:transform 0.18s,opacity 0.18s;transform-origin:160px 160px;"/>
+            <!-- Public Equity -->
+            <path class="pie-slice" data-label="Public Equity" data-pct="20%"
+              d="M230.53,257.08 A120,120 0 0,1 89.47,257.08 L117.68,218.25 A72,72 0 0,0 202.32,218.25 Z"
+              fill="#1aaec4" style="cursor:pointer;transition:transform 0.18s,opacity 0.18s;transform-origin:160px 160px;"/>
+            <!-- Absolute Return -->
+            <path class="pie-slice" data-label="Absolute Return" data-pct="20%"
+              d="M89.47,257.08 A120,120 0 0,1 45.87,122.92 L91.52,137.75 A72,72 0 0,0 117.68,218.25 Z"
+              fill="#2a6f8f" style="cursor:pointer;transition:transform 0.18s,opacity 0.18s;transform-origin:160px 160px;"/>
+            <!-- Credit -->
+            <path class="pie-slice" data-label="Credit" data-pct="20%"
+              d="M45.87,122.92 A120,120 0 0,1 160.00,40.00 L160.00,88.00 A72,72 0 0,0 91.52,137.75 Z"
+              fill="#0d4f78" style="cursor:pointer;transition:transform 0.18s,opacity 0.18s;transform-origin:160px 160px;"/>
+          </g>
+          <!-- Center label -->
+          <text id="pie-label" x="160" y="168" text-anchor="middle"
+            font-family="'EB Garamond', serif" font-size="17" fill="#0d1f3c" font-weight="500">Portfolio</text>
+        </svg>
+      </div>
+
+      <!-- Legend -->
+      <div style="display:flex;flex-direction:column;gap:0;flex:1;min-width:220px;">
+        <div class="pie-legend-item" data-idx="0" style="display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div style="width:14px;height:14px;border-radius:2px;background:#0a8fa3;flex-shrink:0;"></div>
+          <div style="flex:1;">
+            <div style="font-size:0.82rem;font-weight:600;color:var(--navy);letter-spacing:0.04em;">Hedges</div>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:2px;">Hedged equity &amp; macro strategies</div>
+          </div>
+          <div style="font-family:'EB Garamond',serif;font-size:1.3rem;color:#0a8fa3;font-weight:500;">20%</div>
+        </div>
+        <div class="pie-legend-item" data-idx="1" style="display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div style="width:14px;height:14px;border-radius:2px;background:#162d52;flex-shrink:0;"></div>
+          <div style="flex:1;">
+            <div style="font-size:0.82rem;font-weight:600;color:var(--navy);letter-spacing:0.04em;">Private Equity</div>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:2px;">Lower middle market buyouts &amp; co-investments</div>
+          </div>
+          <div style="font-family:'EB Garamond',serif;font-size:1.3rem;color:#0a8fa3;font-weight:500;">20%</div>
+        </div>
+        <div class="pie-legend-item" data-idx="2" style="display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div style="width:14px;height:14px;border-radius:2px;background:#1aaec4;flex-shrink:0;"></div>
+          <div style="flex:1;">
+            <div style="font-size:0.82rem;font-weight:600;color:var(--navy);letter-spacing:0.04em;">Public Equity</div>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:2px;">Biotechnology &amp; differentiated public strategies</div>
+          </div>
+          <div style="font-family:'EB Garamond',serif;font-size:1.3rem;color:#0a8fa3;font-weight:500;">20%</div>
+        </div>
+        <div class="pie-legend-item" data-idx="3" style="display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div style="width:14px;height:14px;border-radius:2px;background:#2a6f8f;flex-shrink:0;"></div>
+          <div style="flex:1;">
+            <div style="font-size:0.82rem;font-weight:600;color:var(--navy);letter-spacing:0.04em;">Absolute Return</div>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:2px;">Uncorrelated return streams &amp; tail risk strategies</div>
+          </div>
+          <div style="font-family:'EB Garamond',serif;font-size:1.3rem;color:#0a8fa3;font-weight:500;">20%</div>
+        </div>
+        <div class="pie-legend-item" data-idx="4" style="display:flex;align-items:center;gap:16px;padding:18px 0;cursor:pointer;">
+          <div style="width:14px;height:14px;border-radius:2px;background:#0d4f78;flex-shrink:0;"></div>
+          <div style="flex:1;">
+            <div style="font-size:0.82rem;font-weight:600;color:var(--navy);letter-spacing:0.04em;">Credit</div>
+            <div style="font-size:0.75rem;color:var(--muted);margin-top:2px;">Specialty &amp; opportunistic private credit</div>
+          </div>
+          <div style="font-family:'EB Garamond',serif;font-size:1.3rem;color:#0a8fa3;font-weight:500;">20%</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        var slices  = document.querySelectorAll('.pie-slice');
+        var legends = document.querySelectorAll('.pie-legend-item');
+        var lbl     = document.getElementById('pie-label');
+
+        function highlight(idx) {
+          slices.forEach(function(s, i) {
+            s.style.transform    = i === idx ? 'scale(1.06)' : 'scale(1)';
+            s.style.opacity      = i === idx ? '1' : '0.55';
+          });
+          legends.forEach(function(l, i) {
+            l.style.opacity = i === idx ? '1' : '0.5';
+          });
+          lbl.textContent = slices[idx].dataset.label;
+        }
+
+        function reset() {
+          slices.forEach(function(s)  { s.style.transform = 'scale(1)'; s.style.opacity = '1'; });
+          legends.forEach(function(l) { l.style.opacity = '1'; });
+          lbl.textContent = 'Portfolio';
+        }
+
+        slices.forEach(function(s, i) {
+          s.addEventListener('mouseenter', function() { highlight(i); });
+          s.addEventListener('mouseleave', reset);
+        });
+        legends.forEach(function(l, i) {
+          l.addEventListener('mouseenter', function() { highlight(i); });
+          l.addEventListener('mouseleave', reset);
+        });
+      })();
+    </script>
+  </section>
+
+  <!-- INVESTMENT PHILOSOPHY -->
+  <section id="philosophy">
+    <div class="section-eyebrow">Investment Philosophy</div>
+    <h2 class="section-title">Investment Philosophy</h2>
+    <p class="section-lead">HighVista's philosophy for generating enduring alpha rests on two interconnected pillars: where and how to seek excess returns, and how to construct a portfolio that captures them durably across market cycles.</p>
+
+    <!-- Approach to Alpha -->
+    <div class="phil-subsection">
+      <div class="phil-subtitle">HighVista's Approach to Alpha</div>
+      <div class="phil-grid">
+        <div class="phil-card">
+          <h4>Less Competitive Markets with Tailwinds</h4>
+          <p>Seek areas with less competition and efficiency to generate excess returns; ideally with thematic tailwinds.</p>
+        </div>
+        <div class="phil-card">
+          <h4>Partner with Specialists with Edge</h4>
+          <p>Specialists may benefit from better sourcing, underwriting, structuring, and asset management.</p>
+        </div>
+        <div class="phil-card">
+          <h4>Flexible Structure &amp; Implementation</h4>
+          <p>Active user of custom structures, co-investments, and direct investments to obtain access to attractive deals well beyond fund investments.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plus divider -->
+    <div class="phil-divider">
+      <div class="phil-divider-icon">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </div>
+    </div>
+
+    <!-- Approach to Portfolio Construction -->
+    <div class="phil-subsection" style="margin-top:0;">
+      <div class="phil-subtitle">HighVista's Approach to Portfolio Construction</div>
+      <div class="phil-grid">
+        <div class="phil-card">
+          <h4>Downside Protection &amp; Tail Risk Management</h4>
+          <p>Protect against significant portfolio losses — these are very difficult to recoup.</p>
+        </div>
+        <div class="phil-card">
+          <h4>True Diversification &amp; Macro-Light Exposures</h4>
+          <p>Seek out drivers of return that fundamentally are less correlated with the broad economy.</p>
+        </div>
+        <div class="phil-card">
+          <h4>Liquidity Management &amp; Catalyst-Driven Emphasis</h4>
+          <p>Catalyst-rich opportunities enable "bond-like" laddering and enhanced liquidity as well as diversification.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resilience">
+    <div class="section-eyebrow">Tested Resilience</div>
+    <h2 class="section-title">Proven Through Major<br>Market Stress Events</h2>
+    <p class="section-lead">HighVista's investment team and risk management process have been tested through three distinct and severe market dislocations — with the Multi-Asset strategy navigating each without compromising its long-term objectives.</p>
+    <div class="stress-grid">
+      <div class="stress-card">
+        <div class="stress-badge">2008–2009</div>
+        <h4>Global Financial Crisis</h4>
+        <p>During the most severe market dislocation since the Great Depression, HighVista's emphasis on diversification, tail risk mitigation, and uncorrelated return sources demonstrated its value. The firm identified opportunistic entry points across credit and private markets during the dislocation.</p>
+      </div>
+      <div class="stress-card">
+        <div class="stress-badge">2020</div>
+        <h4>COVID-19 Pandemic</h4>
+        <p>The rapid market selloff and equally rapid recovery of 2020 tested portfolio liquidity management and the resilience of the private markets book. The strategy's broad diversification and active risk management helped navigate extreme volatility while preserving capital for opportunistic deployment.</p>
+      </div>
+      <div class="stress-card">
+        <div class="stress-badge">2022</div>
+        <h4>Rate Shock</h4>
+        <p>The most rapid rate hiking cycle in decades created significant dislocations in public and private markets. HighVista's low correlation to traditional fixed income and its focus on structurally uncorrelated return sources provided meaningful downside protection during this environment.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="dark">
+    <div class="section-eyebrow">How to Access</div>
+    <h2 class="section-title">Investment Access Options</h2>
+    <p class="section-lead">The Multi-Asset Alternative Strategy is available to qualified institutional investors through commingled fund structures or customized separate account mandates.</p>
+    <div class="access-grid">
+      <div class="access-box">
+        <div class="access-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg></div>
+        <h4>Commingled Fund</h4>
+        <p>Access through HighVista's flagship commingled fund structure, offering efficient implementation, diversification across vintages, and full exposure to the multi-asset platform from a single investment.</p>
+      </div>
+      <div class="access-box">
+        <div class="access-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+        <h4>Customized Mandate</h4>
+        <p>Institutional clients with specific portfolio objectives, constraints, or liquidity requirements can access the strategy through a customized separate account mandate, tailored to their particular investment policy guidelines.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Interested in a multi-asset<br>alternatives allocation?</h2>
+    <a href="mailto:info@highvistastrategies.com" class="btn-primary">Contact Us <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a><p>An employee-owned alternative asset manager helping sophisticated investors achieve enduring alpha in structurally inefficient markets.</p></div>
+      <div class="footer-links-group"><h5>Strategies</h5><ul><li><a href="multi-asset.html">Multi-Asset Alternatives</a></li><li><a href="private-credit.html">Private Credit</a></li><li><a href="private-equity.html">Private Equity</a></li><li><a href="venture-capital.html">Venture Capital</a></li><li><a href="public-markets.html">Public Markets</a></li></ul></div>
+      <div class="footer-links-group"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="clients.html">Clients</a></li></ul></div>
+      <div class="footer-links-group"><h5>Contact</h5><ul><li><a href="#">Boston, Massachusetts</a></li><li><a href="mailto:info@highvistastrategies.com">info@highvistastrategies.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 HighVista Strategies LLC. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">ADV Brochure</a></div></div>
+  </footer>
+  <div class="disclosure"><p>HighVista Strategies LLC is an investment adviser registered with the U.S. Securities and Exchange Commission. Registration does not imply a certain level of skill or training. Past performance is not indicative of future results. This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. Investing involves risk, including the possible loss of principal.</p></div>
+  <script>
+    (function() {
+      var page = window.location.pathname.split('/').pop() || 'highvista_redesign.html';
+      document.querySelectorAll('.nav-links a').forEach(function(a) {
+        var href = (a.getAttribute('href') || '').split('#')[0];
+        if (href && href === page) { a.classList.add('nav-active'); }
+      });
+    })();
+  </script>
+</body>
+</html>

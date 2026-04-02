@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Differentiated Public Market Strategies – HighVista Strategies</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy:#0d1f3c;--navy-mid:#162d52;--accent:#0a8fa3;--accent-lt:#1aaec4;--cream:#f7f4ef;--light:#ffffff;--text:#1a1a2e;--muted:#6b7280;--border:#e2ddd6; }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--light);line-height:1.7;font-size:16px;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:100px;background:rgba(13,31,60,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(10,143,163,0.2);}
+    .nav-logo{font-family:'EB Garamond',serif;font-size:1.35rem;font-weight:500;color:var(--light);letter-spacing:0.02em;text-decoration:none;}
+    .nav-logo span{color:var(--accent-lt);}
+    .nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+    .nav-links a{color:rgba(255,255,255,0.78);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--accent-lt);}
+    .nav-dropdown{position:relative;}
+    .nav-dropdown>a::after{content:' ▾';font-size:0.65rem;}
+    .nav-dropdown-menu{position:absolute;top:calc(100% + 12px);left:0;background:var(--navy);min-width:240px;padding:8px 0;opacity:0;visibility:hidden;transition:opacity 0.2s,visibility 0.2s;border-top:2px solid var(--accent);box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+    .nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;}
+    .nav-dropdown-menu a{display:block;padding:10px 20px;font-size:0.8rem;color:rgba(255,255,255,0.65);letter-spacing:0.05em;transition:background 0.15s,color 0.15s;text-transform:none;}
+    .nav-dropdown-menu a:hover{background:rgba(255,255,255,0.05);color:var(--accent-lt);}
+    .nav-dropdown-menu .sub-label{display:block;padding:10px 20px 4px;font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:0.12em;text-transform:uppercase;}
+    .nav-cta{background:transparent!important;border:1px solid var(--accent);color:var(--accent)!important;padding:8px 20px;border-radius:2px;}
+    .nav-cta:hover{background:var(--accent)!important;color:var(--light)!important;}
+    .page-hero{padding:164px 60px 80px;min-height:440px;background:var(--navy);position:relative;overflow:hidden;}
+    .page-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(10,143,163,0.08) 0%,transparent 70%);}
+    .breadcrumb{position:relative;z-index:1;display:flex;align-items:center;gap:8px;margin-bottom:24px;}
+    .breadcrumb a,.breadcrumb span{font-size:0.75rem;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;}
+    .breadcrumb a:hover{color:var(--accent-lt);}
+    .breadcrumb-sep{color:rgba(255,255,255,0.2);font-size:0.65rem;}
+    .page-eyebrow{position:relative;z-index:1;display:inline-flex;align-items:center;gap:12px;color:var(--accent-lt);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;}
+    .page-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
+    .page-hero h1{position:relative;z-index:1;font-family:'EB Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:400;color:var(--light);line-height:1.2;margin-bottom:20px;}
+    .page-hero p{position:relative;z-index:1;color:rgba(255,255,255,0.6);font-size:1.05rem;font-weight:300;max-width:580px;line-height:1.8;}
+    section{padding:90px 60px;}
+    .section-eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--accent);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px;}
+    .section-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
+    .section-title{font-family:'EB Garamond',serif;font-size:clamp(1.9rem,3vw,2.6rem);font-weight:400;color:var(--navy);line-height:1.2;margin-bottom:20px;}
+    .section-lead{color:var(--muted);font-size:1rem;font-weight:300;max-width:620px;line-height:1.8;}
+    /* SUB-STRATEGIES */
+    .sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);margin-top:56px;}
+    .sub-card{background:var(--light);padding:52px 44px;}
+    .sub-card .sub-label{font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:block;}
+    .sub-card h3{font-family:'EB Garamond',serif;font-size:1.7rem;color:var(--navy);margin-bottom:20px;font-weight:500;}
+    .sub-card p{font-size:0.9rem;color:var(--muted);line-height:1.8;margin-bottom:16px;}
+    .sub-card ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:24px;border-top:1px solid var(--border);padding-top:24px;}
+    .sub-card li{font-size:0.875rem;color:var(--text);display:flex;gap:10px;align-items:flex-start;}
+    .sub-card li::before{content:'—';color:var(--accent);flex-shrink:0;}
+    /* WHY PUBLIC */
+    #why{background:var(--cream);}
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px;}
+    .why-item{border-top:2px solid var(--border);padding-top:24px;}
+    .why-item:hover{border-top-color:var(--accent);}
+    .why-item h4{font-size:0.9rem;font-weight:600;color:var(--navy);margin-bottom:10px;}
+    .why-item p{font-size:0.875rem;color:var(--muted);line-height:1.75;}
+    /* DARK */
+    #integration{background:var(--navy);}
+    #integration .section-title{color:var(--light);}
+    #integration .section-lead{color:rgba(255,255,255,0.55);}
+    .int-two{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:56px;}
+    .int-body p{color:rgba(255,255,255,0.65);font-size:1rem;line-height:1.85;margin-bottom:20px;}
+    .int-facts{display:flex;flex-direction:column;gap:32px;}
+    .int-fact{border-left:2px solid rgba(10,143,163,0.4);padding-left:24px;}
+    .int-fact h4{font-size:0.9rem;font-weight:600;color:var(--light);margin-bottom:8px;}
+    .int-fact p{font-size:0.875rem;color:rgba(255,255,255,0.45);line-height:1.7;}
+    .cta-banner{background:var(--navy-mid);padding:80px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;border-top:1px solid rgba(10,143,163,0.2);border-bottom:1px solid rgba(10,143,163,0.2);}
+    .cta-banner h2{font-family:'EB Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--light);font-weight:400;max-width:560px;}
+    .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--light);padding:14px 32px;font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.15s;}
+    .btn-primary:hover{background:var(--accent-lt);transform:translateY(-1px);}
+    footer{background:var(--navy);padding:60px 60px 40px;border-top:1px solid rgba(255,255,255,0.06);}
+    .footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:60px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);}
+    .footer-brand .nav-logo{display:block;margin-bottom:16px;font-size:1.2rem;}
+    .footer-brand p{color:rgba(255,255,255,0.4);font-size:0.85rem;line-height:1.7;max-width:280px;}
+    .footer-links-group h5{color:var(--accent-lt);font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:18px;}
+    .footer-links-group ul{list-style:none;}
+    .footer-links-group li{margin-bottom:10px;}
+    .footer-links-group a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.875rem;transition:color 0.2s;}
+    .footer-links-group a:hover{color:var(--accent-lt);}
+    .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;}
+    .footer-bottom p{color:rgba(255,255,255,0.28);font-size:0.78rem;}
+    .footer-legal{display:flex;gap:24px;}
+    .footer-legal a{color:rgba(255,255,255,0.28);font-size:0.78rem;text-decoration:none;}
+    .footer-legal a:hover{color:rgba(255,255,255,0.6);}
+    .disclosure{background:#f0ede8;padding:28px 60px;border-top:1px solid var(--border);}
+    .disclosure p{font-size:0.72rem;color:#999;line-height:1.6;}
+    @media(max-width:900px){nav{padding:0 24px;}.nav-links{display:none;}section,.page-hero,.cta-banner{padding-left:24px;padding-right:24px;}.sub-grid{grid-template-columns:1fr;}.why-grid{grid-template-columns:1fr;}.int-two{grid-template-columns:1fr;gap:40px;}.footer-top{flex-direction:column;gap:36px;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}.cta-banner{flex-direction:column;text-align:center;}.disclosure{padding:24px;}}
+  .hero-mountain{position:absolute;right:0;top:0;height:100%;width:58%;pointer-events:none;object-fit:cover;object-position:left top;-webkit-mask-image:linear-gradient(to right,transparent 0%,black 18%);mask-image:linear-gradient(to right,transparent 0%,black 18%);opacity:0.9;}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a>
+    <ul class="nav-links">
+            <li class="nav-dropdown">
+        <a href="about.html">About</a>
+        <div class="nav-dropdown-menu">
+          <a href="about.html#firm-edge">Firm Edge</a>
+          <a href="about.html#culture">Culture</a>
+          <a href="about.html#milestones">History</a>
+          <a href="team.html">Our Team</a>
+          <a href="about.html#responsibility">Responsibility</a>
+        </div>
+      </li>
+      <li class="nav-dropdown"><a href="#">Strategies</a>
+        <div class="nav-dropdown-menu">
+          <span class="sub-label">All Strategies</span><a href="multi-asset.html">Multi-Asset Alternatives</a>
+          <span class="sub-label">Private Markets</span><a href="private-credit.html">Private Credit</a><a href="private-equity.html">Lower Middle Market PE</a><a href="venture-capital.html">Early-Stage Venture Capital</a>
+          <span class="sub-label">Public Markets</span><a href="public-markets.html">Differentiated Public Markets</a>
+        </div>
+      </li>
+      <li><a href="team.html">Our Team</a></li>
+      <li><a href="clients.html">Clients</a></li>
+      <li><a href="news.html">News &amp; Insights</a></li>
+      <li><a href="mailto:info@highvistastrategies.com" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=85&fit=crop" class="hero-mountain" alt="">
+    <div class="breadcrumb"><a href="highvista_redesign.html">Home</a><span class="breadcrumb-sep">›</span><span>Public Markets</span></div>
+    <div class="page-eyebrow">Public Markets</div>
+    <h1>Differentiated Public<br>Market Strategies</h1>
+    <p>HighVista brings the same discipline and edge it applies in private markets to select areas of the public markets — generating differentiated returns through specialized expertise in biotechnology and hedged equity strategies.</p>
+  </div>
+
+  <!-- SUB-STRATEGIES -->
+  <section id="strategies">
+    <div class="section-eyebrow">Our Public Market Strategies</div>
+    <h2 class="section-title">Two Distinct Areas<br>of Specialized Expertise</h2>
+    <div class="sub-grid">
+      <div class="sub-card">
+        <span class="sub-label">Strategy One</span>
+        <h3>Biotechnology Equities</h3>
+        <p>HighVista has built deep, dedicated expertise in biotechnology equity investing — a sector where the intersection of scientific complexity, regulatory risk, and binary clinical outcomes creates persistent information asymmetry and a durable edge for specialists.</p>
+        <p>Our biotechnology team combines rigorous scientific analysis with financial expertise to identify companies where the market misprices the probability and magnitude of clinical success. This disciplined approach targets asymmetric risk/reward profiles: limited downside in companies with strong pipelines and balance sheets, and significant upside from catalytic events.</p>
+        <ul>
+          <li>Deep scientific due diligence on clinical pipeline and mechanism of action</li>
+          <li>Focus on information asymmetry and market mispricing of binary events</li>
+          <li>Portfolio construction designed for asymmetric return profiles</li>
+          <li>Active management through catalyst-driven events and binary readouts</li>
+        </ul>
+      </div>
+      <div class="sub-card">
+        <span class="sub-label">Strategy Two</span>
+        <h3>Hedged Public Market Strategy</h3>
+        <p>HighVista's Hedged Public Market Strategy is designed to achieve strong risk-adjusted returns while maintaining deliberately low net exposure to the global equity market — providing a genuine alternative return stream for investors seeking to reduce their dependence on equity market beta.</p>
+        <p>The strategy combines long positions in companies with differentiated, underappreciated business models with short positions in overvalued, deteriorating businesses — a portfolio designed to generate alpha on both sides while managing overall market exposure with discipline.</p>
+        <ul>
+          <li>Low net equity market exposure — an authentic alternative to long-only equity</li>
+          <li>Long/short construction targeting differentiated alpha generation on both sides</li>
+          <li>Rigorous risk management including factor exposure, position sizing, and sector limits</li>
+          <li>Designed to complement private market allocations within a broader alternatives portfolio</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why">
+    <div class="section-eyebrow">The HighVista Edge in Public Markets</div>
+    <h2 class="section-title">Why HighVista in<br>Public Markets?</h2>
+    <div class="why-grid">
+      <div class="why-item"><h4>Sector Specialization</h4><p>Generalist public equity managers cannot compete with specialists in complex, knowledge-intensive sectors like biotechnology. HighVista's dedicated team has the scientific and financial expertise to identify opportunities that generalists miss.</p></div>
+      <div class="why-item"><h4>True Market Neutrality</h4><p>Many "alternative" public equity strategies are simply levered beta. HighVista's hedged strategy is built from the ground up to maintain genuinely low market exposure, providing authentic diversification for client portfolios.</p></div>
+      <div class="why-item"><h4>Integration with Private Markets</h4><p>HighVista's public markets strategies benefit from — and contribute to — the firm's broad alternative investment platform. Insights from private equity and venture capital inform public market views, and vice versa.</p></div>
+    </div>
+  </section>
+
+  <!-- INTEGRATION -->
+  <section id="integration">
+    <div class="section-eyebrow">Platform Integration</div>
+    <h2 class="section-title">Public &amp; Private: A<br>Unified Investment Platform</h2>
+    <div class="int-two">
+      <div class="int-body">
+        <p>HighVista is one of a small number of alternative asset managers that maintains genuine expertise in both private and public markets — and deliberately integrates insights across the two.</p>
+        <p>Our biotechnology equity team shares research and analysis with the venture capital team's life sciences investments. Our hedged public market team provides real-time market intelligence to the broader investment platform. The multi-asset strategy benefits from the full breadth of both capabilities.</p>
+        <p>This integration creates a compounding informational advantage: insights generated in private markets inform public market positioning, and the real-time signals from public markets improve private investment decision-making. It is a genuine platform effect that single-strategy managers cannot replicate.</p>
+      </div>
+      <div class="int-facts">
+        <div class="int-fact"><h4>Biotech Expertise Spans Public &amp; Private</h4><p>HighVista's life sciences expertise is applied consistently across the public biotechnology strategy, venture capital investments in life sciences, and the multi-asset portfolio — creating a unified, integrated view of the sector.</p></div>
+        <div class="int-fact"><h4>Public Markets as a Risk Management Tool</h4><p>The hedged public market strategy also serves as a real-time risk management signal for the broader portfolio — providing high-frequency market data that informs portfolio-level positioning and tail risk management.</p></div>
+        <div class="int-fact"><h4>Single Access Point Through Multi-Asset</h4><p>Investors who prefer a single allocation can access both public market strategies as part of the Multi-Asset Alternative Strategy — gaining diversified exposure without managing multiple manager relationships.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Interested in HighVista's public<br>market strategies?</h2>
+    <a href="mailto:info@highvistastrategies.com" class="btn-primary">Contact Us <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a><p>An employee-owned alternative asset manager helping sophisticated investors achieve enduring alpha in structurally inefficient markets.</p></div>
+      <div class="footer-links-group"><h5>Strategies</h5><ul><li><a href="multi-asset.html">Multi-Asset Alternatives</a></li><li><a href="private-credit.html">Private Credit</a></li><li><a href="private-equity.html">Private Equity</a></li><li><a href="venture-capital.html">Venture Capital</a></li><li><a href="public-markets.html">Public Markets</a></li></ul></div>
+      <div class="footer-links-group"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="clients.html">Clients</a></li></ul></div>
+      <div class="footer-links-group"><h5>Contact</h5><ul><li><a href="#">Boston, Massachusetts</a></li><li><a href="mailto:info@highvistastrategies.com">info@highvistastrategies.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 HighVista Strategies LLC. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">ADV Brochure</a></div></div>
+  </footer>
+  <div class="disclosure"><p>HighVista Strategies LLC is an investment adviser registered with the U.S. Securities and Exchange Commission. Registration does not imply a certain level of skill or training. Past performance is not indicative of future results. This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. Investing involves risk, including the possible loss of principal.</p></div>
+  <script>
+    (function() {
+      var page = window.location.pathname.split('/').pop() || 'highvista_redesign.html';
+      document.querySelectorAll('.nav-links a').forEach(function(a) {
+        var href = (a.getAttribute('href') || '').split('#')[0];
+        if (href && href === page) { a.classList.add('nav-active'); }
+      });
+    })();
+  </script>
+</body>
+</html>

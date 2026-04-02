@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Early-Stage Venture Capital – HighVista Strategies</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy:#0d1f3c;--navy-mid:#162d52;--accent:#0a8fa3;--accent-lt:#1aaec4;--cream:#f7f4ef;--light:#ffffff;--text:#1a1a2e;--muted:#6b7280;--border:#e2ddd6; }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--light);line-height:1.7;font-size:16px;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:100px;background:rgba(13,31,60,0.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(10,143,163,0.2);}
+    .nav-logo{font-family:'EB Garamond',serif;font-size:1.35rem;font-weight:500;color:var(--light);letter-spacing:0.02em;text-decoration:none;}
+    .nav-logo span{color:var(--accent-lt);}
+    .nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+    .nav-links a{color:rgba(255,255,255,0.78);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;}
+    .nav-links a:hover{color:var(--accent-lt);}
+    .nav-dropdown{position:relative;}
+    .nav-dropdown>a::after{content:' ▾';font-size:0.65rem;}
+    .nav-dropdown-menu{position:absolute;top:calc(100% + 12px);left:0;background:var(--navy);min-width:240px;padding:8px 0;opacity:0;visibility:hidden;transition:opacity 0.2s,visibility 0.2s;border-top:2px solid var(--accent);box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+    .nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;}
+    .nav-dropdown-menu a{display:block;padding:10px 20px;font-size:0.8rem;color:rgba(255,255,255,0.65);letter-spacing:0.05em;transition:background 0.15s,color 0.15s;text-transform:none;}
+    .nav-dropdown-menu a:hover{background:rgba(255,255,255,0.05);color:var(--accent-lt);}
+    .nav-dropdown-menu .sub-label{display:block;padding:10px 20px 4px;font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:0.12em;text-transform:uppercase;}
+    .nav-cta{background:transparent!important;border:1px solid var(--accent);color:var(--accent)!important;padding:8px 20px;border-radius:2px;}
+    .nav-cta:hover{background:var(--accent)!important;color:var(--light)!important;}
+    .page-hero{padding:164px 60px 80px;min-height:440px;background:var(--navy);position:relative;overflow:hidden;}
+    .page-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(10,143,163,0.08) 0%,transparent 70%);}
+    .breadcrumb{position:relative;z-index:1;display:flex;align-items:center;gap:8px;margin-bottom:24px;}
+    .breadcrumb a,.breadcrumb span{font-size:0.75rem;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;}
+    .breadcrumb a:hover{color:var(--accent-lt);}
+    .breadcrumb-sep{color:rgba(255,255,255,0.2);font-size:0.65rem;}
+    .page-eyebrow{position:relative;z-index:1;display:inline-flex;align-items:center;gap:12px;color:var(--accent-lt);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px;}
+    .page-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
+    .page-hero h1{position:relative;z-index:1;font-family:'EB Garamond',serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:400;color:var(--light);line-height:1.2;margin-bottom:20px;}
+    .page-hero p{position:relative;z-index:1;color:rgba(255,255,255,0.6);font-size:1.05rem;font-weight:300;max-width:580px;line-height:1.8;}
+    section{padding:90px 60px;}
+    .section-eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--accent);font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px;}
+    .section-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
+    .section-title{font-family:'EB Garamond',serif;font-size:clamp(1.9rem,3vw,2.6rem);font-weight:400;color:var(--navy);line-height:1.2;margin-bottom:20px;}
+    .section-lead{color:var(--muted);font-size:1rem;font-weight:300;max-width:620px;line-height:1.8;}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:56px;}
+    .body-text p{color:#444;font-size:1rem;line-height:1.85;margin-bottom:20px;}
+    .feature-list{display:flex;flex-direction:column;gap:0;}
+    .feature-item{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border);}
+    .feature-item:first-child{border-top:1px solid var(--border);}
+    .feature-num{font-family:'EB Garamond',serif;font-size:1.4rem;color:var(--accent);opacity:0.7;min-width:32px;line-height:1;padding-top:2px;}
+    .feature-item h4{font-size:0.9rem;font-weight:600;color:var(--navy);margin-bottom:8px;}
+    .feature-item p{font-size:0.875rem;color:var(--muted);line-height:1.7;}
+    #sectors{background:var(--cream);}
+    .sector-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border:1px solid var(--border);margin-top:56px;}
+    .sector-card{background:var(--light);padding:32px 28px;transition:background 0.2s;}
+    .sector-card:hover{background:var(--cream);}
+    .sector-card h4{font-size:0.9rem;font-weight:600;color:var(--navy);margin-bottom:10px;}
+    .sector-card p{font-size:0.875rem;color:var(--muted);line-height:1.75;}
+    .sector-icon{font-family:'EB Garamond',serif;font-size:2rem;color:var(--accent);opacity:0.5;line-height:1;margin-bottom:16px;}
+    #fund{background:var(--navy);}
+    #fund .section-title{color:var(--light);}
+    #fund .section-lead{color:rgba(255,255,255,0.55);}
+    .fund-highlight{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);margin-top:56px;}
+    .fund-box{background:var(--navy);padding:48px 36px;}
+    .fund-stat{font-family:'EB Garamond',serif;font-size:3rem;color:var(--accent-lt);line-height:1;margin-bottom:10px;}
+    .fund-box h4{font-size:0.9rem;font-weight:600;color:var(--light);margin-bottom:12px;}
+    .fund-box p{font-size:0.875rem;color:rgba(255,255,255,0.5);line-height:1.75;}
+    .cta-banner{background:var(--navy-mid);padding:80px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;border-top:1px solid rgba(10,143,163,0.2);border-bottom:1px solid rgba(10,143,163,0.2);}
+    .cta-banner h2{font-family:'EB Garamond',serif;font-size:clamp(1.8rem,3vw,2.4rem);color:var(--light);font-weight:400;max-width:560px;}
+    .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--light);padding:14px 32px;font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background 0.2s,transform 0.15s;}
+    .btn-primary:hover{background:var(--accent-lt);transform:translateY(-1px);}
+    footer{background:var(--navy);padding:60px 60px 40px;border-top:1px solid rgba(255,255,255,0.06);}
+    .footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:60px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);}
+    .footer-brand .nav-logo{display:block;margin-bottom:16px;font-size:1.2rem;}
+    .footer-brand p{color:rgba(255,255,255,0.4);font-size:0.85rem;line-height:1.7;max-width:280px;}
+    .footer-links-group h5{color:var(--accent-lt);font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:18px;}
+    .footer-links-group ul{list-style:none;}
+    .footer-links-group li{margin-bottom:10px;}
+    .footer-links-group a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.875rem;transition:color 0.2s;}
+    .footer-links-group a:hover{color:var(--accent-lt);}
+    .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;}
+    .footer-bottom p{color:rgba(255,255,255,0.28);font-size:0.78rem;}
+    .footer-legal{display:flex;gap:24px;}
+    .footer-legal a{color:rgba(255,255,255,0.28);font-size:0.78rem;text-decoration:none;}
+    .footer-legal a:hover{color:rgba(255,255,255,0.6);}
+    .disclosure{background:#f0ede8;padding:28px 60px;border-top:1px solid var(--border);}
+    .disclosure p{font-size:0.72rem;color:#999;line-height:1.6;}
+    @media(max-width:900px){nav{padding:0 24px;}.nav-links{display:none;}section,.page-hero,.cta-banner{padding-left:24px;padding-right:24px;}.two-col{grid-template-columns:1fr;gap:40px;}.sector-grid{grid-template-columns:1fr 1fr;}.fund-highlight{grid-template-columns:1fr;}.footer-top{flex-direction:column;gap:36px;}.footer-bottom{flex-direction:column;gap:12px;text-align:center;}.cta-banner{flex-direction:column;text-align:center;}.disclosure{padding:24px;}}
+  .hero-mountain{position:absolute;right:0;top:0;height:100%;width:58%;pointer-events:none;object-fit:cover;object-position:left top;-webkit-mask-image:linear-gradient(to right,transparent 0%,black 18%);mask-image:linear-gradient(to right,transparent 0%,black 18%);opacity:0.9;}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a>
+    <ul class="nav-links">
+            <li class="nav-dropdown">
+        <a href="about.html">About</a>
+        <div class="nav-dropdown-menu">
+          <a href="about.html#firm-edge">Firm Edge</a>
+          <a href="about.html#culture">Culture</a>
+          <a href="about.html#milestones">History</a>
+          <a href="team.html">Our Team</a>
+          <a href="about.html#responsibility">Responsibility</a>
+        </div>
+      </li>
+      <li class="nav-dropdown"><a href="#">Strategies</a>
+        <div class="nav-dropdown-menu">
+          <span class="sub-label">All Strategies</span><a href="multi-asset.html">Multi-Asset Alternatives</a>
+          <span class="sub-label">Private Markets</span><a href="private-credit.html">Private Credit</a><a href="private-equity.html">Lower Middle Market PE</a><a href="venture-capital.html">Early-Stage Venture Capital</a>
+          <span class="sub-label">Public Markets</span><a href="public-markets.html">Differentiated Public Markets</a>
+        </div>
+      </li>
+      <li><a href="team.html">Our Team</a></li>
+      <li><a href="clients.html">Clients</a></li>
+      <li><a href="news.html">News &amp; Insights</a></li>
+      <li><a href="mailto:info@highvistastrategies.com" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=85&fit=crop" class="hero-mountain" alt="">
+    <div class="breadcrumb"><a href="highvista_redesign.html">Home</a><span class="breadcrumb-sep">›</span><span>Private Markets</span><span class="breadcrumb-sep">›</span><span>Venture Capital</span></div>
+    <div class="page-eyebrow">Private Markets</div>
+    <h1>Early-Stage<br>Venture Capital</h1>
+    <p>HighVista's venture capital strategy provides access to concentrated portfolios of access-constrained, early-stage fund managers positioned to capitalize on defining secular trends in technology and life sciences.</p>
+  </div>
+
+  <section id="overview">
+    <div class="section-eyebrow">Strategy Overview</div>
+    <h2 class="section-title">Accessing the Most<br>Constrained Venture Funds</h2>
+    <div class="two-col">
+      <div class="body-text">
+        <p>Consistent with HighVista's broader philosophy of targeting structurally inefficient and access-constrained markets, our venture capital strategy focuses on a specific and highly attractive segment: the best early-stage fund managers whose funds are consistently oversubscribed and difficult for most investors to access.</p>
+        <p>The strategy invests in a concentrated portfolio of these access-constrained managers — firms with exceptional track records in seed and Series A investing, deep networks in their target sectors, and fund sizes that maintain the discipline and flexibility needed to generate top-tier venture returns.</p>
+        <p>HighVista's venture capital team joined the firm in 2023 as part of the acquisition of the abrdn U.S. private markets business, bringing a seasoned team with deep relationships in the early-stage venture ecosystem and a history of securing allocations to the most sought-after managers.</p>
+        <p>In 2025, the team raised $270 million for its latest fund — oversubscribed — demonstrating strong investor confidence in HighVista's ability to deliver differentiated venture capital access.</p>
+      </div>
+      <div>
+        <div class="feature-list">
+          <div class="feature-item"><div class="feature-num">01</div><div><h4>Access-Constrained Managers</h4><p>We focus specifically on early-stage fund managers whose funds are consistently oversubscribed — providing institutional investors with access that they could not achieve independently.</p></div></div>
+          <div class="feature-item"><div class="feature-num">02</div><div><h4>Concentrated, High-Conviction Portfolio</h4><p>Rather than a broad fund-of-funds approach, we build concentrated portfolios of our highest-conviction manager relationships — typically 10–15 funds — to maximize the impact of access and selection.</p></div></div>
+          <div class="feature-item"><div class="feature-num">03</div><div><h4>Secular Trend Alignment</h4><p>Portfolio managers are selected for their positioning in the most powerful secular trends: artificial intelligence, enterprise software, fintech, life sciences, and blockchain infrastructure.</p></div></div>
+          <div class="feature-item"><div class="feature-num">04</div><div><h4>HighVista Platform Advantage</h4><p>Venture capital managers benefit from HighVista's broader platform — connections across private equity, private credit, and institutional networks that create a richer ecosystem for portfolio companies.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sectors">
+    <div class="section-eyebrow">Target Sectors</div>
+    <h2 class="section-title">Secular Trends Driving<br>Exceptional Returns</h2>
+    <p class="section-lead">HighVista's venture portfolio managers are concentrated in sectors with durable structural tailwinds and the greatest potential for disruptive, venture-scale returns.</p>
+    <div class="sector-grid">
+      <div class="sector-card"><div class="sector-icon">AI</div><h4>Artificial Intelligence</h4><p>Foundation models, AI infrastructure, and applied AI applications across industries represent the defining technology platform of this era. HighVista's managers have early, concentrated exposure to category-defining AI companies.</p></div>
+      <div class="sector-card"><div class="sector-icon">SaaS</div><h4>Enterprise Software</h4><p>Mission-critical software for businesses — from vertical SaaS to developer tools to AI-enhanced workflows — continues to produce durable, capital-efficient businesses with exceptional unit economics.</p></div>
+      <div class="sector-card"><div class="sector-icon">Bio</div><h4>Life Sciences</h4><p>Biotechnology, drug discovery, medical devices, and computational biology — sectors where HighVista has long-standing expertise through its public markets biotechnology team — continue to offer exceptional venture returns.</p></div>
+      <div class="sector-card"><div class="sector-icon">Fin</div><h4>Fintech</h4><p>Financial services technology — payments infrastructure, digital banking, insurance technology, and capital markets innovation — remains a deep well of venture opportunity driven by ongoing disruption of legacy financial systems.</p></div>
+      <div class="sector-card"><div class="sector-icon">∞</div><h4>Blockchain &amp; Web3</h4><p>Decentralized infrastructure, tokenized assets, and blockchain-native applications represent an emerging technology stack where early fund-level access can yield exceptional risk-adjusted returns for patient investors.</p></div>
+      <div class="sector-card"><div class="sector-icon">+</div><h4>Emerging Opportunities</h4><p>HighVista's venture portfolio is not static — we continuously evaluate emerging sectors and manager relationships to ensure the portfolio remains positioned in the most attractive areas of the early-stage landscape.</p></div>
+    </div>
+  </section>
+
+  <section id="fund">
+    <div class="section-eyebrow">Latest Fund</div>
+    <h2 class="section-title">2025 Venture Capital Fund</h2>
+    <p class="section-lead">HighVista's most recent venture capital fund demonstrates the continued strength of the team's access and investor relationships.</p>
+    <div class="fund-highlight">
+      <div class="fund-box">
+        <div class="fund-stat">$270M</div>
+        <h4>Oversubscribed Close</h4>
+        <p>HighVista's 2025 venture capital fund closed oversubscribed at $270 million, surpassing its original target — a reflection of strong demand from institutional investors seeking access to HighVista's curated portfolio of early-stage fund managers.</p>
+      </div>
+      <div class="fund-box">
+        <div class="fund-stat">2023</div>
+        <h4>Team Joined HighVista</h4>
+        <p>The venture capital team joined HighVista in 2023 as part of the firm's acquisition of the abrdn U.S. private markets business, bringing a seasoned platform with proven manager relationships and a multi-fund track record across technology and life sciences sectors.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Interested in accessing HighVista's<br>venture capital strategy?</h2>
+    <a href="mailto:info@highvistastrategies.com" class="btn-primary">Contact Us <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand"><a href="highvista_redesign.html" class="nav-logo"><img src="logo.svg" alt="HighVista Strategies" style="height:62px;width:auto;display:block;"></a><p>An employee-owned alternative asset manager helping sophisticated investors achieve enduring alpha in structurally inefficient markets.</p></div>
+      <div class="footer-links-group"><h5>Strategies</h5><ul><li><a href="multi-asset.html">Multi-Asset Alternatives</a></li><li><a href="private-credit.html">Private Credit</a></li><li><a href="private-equity.html">Private Equity</a></li><li><a href="venture-capital.html">Venture Capital</a></li><li><a href="public-markets.html">Public Markets</a></li></ul></div>
+      <div class="footer-links-group"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="clients.html">Clients</a></li></ul></div>
+      <div class="footer-links-group"><h5>Contact</h5><ul><li><a href="#">Boston, Massachusetts</a></li><li><a href="mailto:info@highvistastrategies.com">info@highvistastrategies.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 HighVista Strategies LLC. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">ADV Brochure</a></div></div>
+  </footer>
+  <div class="disclosure"><p>HighVista Strategies LLC is an investment adviser registered with the U.S. Securities and Exchange Commission. Registration does not imply a certain level of skill or training. Past performance is not indicative of future results. This website is for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. Investing involves risk, including the possible loss of principal.</p></div>
+  <script>
+    (function() {
+      var page = window.location.pathname.split('/').pop() || 'highvista_redesign.html';
+      document.querySelectorAll('.nav-links a').forEach(function(a) {
+        var href = (a.getAttribute('href') || '').split('#')[0];
+        if (href && href === page) { a.classList.add('nav-active'); }
+      });
+    })();
+  </script>
+</body>
+</html>
